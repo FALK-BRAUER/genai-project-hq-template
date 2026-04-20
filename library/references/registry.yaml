@@ -1,0 +1,593 @@
+# Reference Library Registry
+# Human-edited. Weekly Qwen worker generates detail pages from this.
+# Add: url, category, note. The worker handles the rest.
+
+templates:
+  # --- SaaS ---
+  - url: https://github.com/shadcn-ui/taxonomy
+    category: saas
+    note: Next.js 13 App Router reference implementation, server components, tRPC, Prisma
+
+  - url: https://github.com/nextjs/saas-starter
+    category: saas
+    note: Official Next.js SaaS starter with Stripe, Drizzle ORM, server actions
+
+  - url: https://github.com/wasp-lang/open-saas
+    category: saas
+    note: React + Node + Prisma SaaS with AGENTS.md, Claude Code plugin, Stripe/Polar.sh
+
+  - url: https://github.com/vercel/nextjs-subscription-payments
+    category: saas
+    note: Supabase auth + Stripe Checkout, Vercel one-click deploy
+
+  - url: https://github.com/ixartz/SaaS-Boilerplate
+    category: saas
+    note: Most feature-complete open-source SaaS boilerplate, Clerk auth, multi-tenancy
+
+  - url: https://github.com/epicweb-dev/epic-stack
+    category: saas
+    note: Remix, SQLite via LiteFS, Prisma, TOTP 2FA, Kent C. Dodds stack
+
+  - url: https://github.com/boxyhq/saas-starter-kit
+    category: saas
+    note: Enterprise-focused, SAML SSO, audit logs, directory sync
+
+  - url: https://github.com/mickasmt/next-saas-stripe-starter
+    category: saas
+    note: Lean Next.js 14 + Auth.js v5 + Prisma + Neon + Stripe
+
+  # --- E-commerce ---
+  - url: https://github.com/vercel/commerce
+    category: ecommerce
+    note: Headless storefront, multiple backend connectors (Shopify, Saleor, Medusa)
+
+  - url: https://github.com/Shopify/dawn
+    category: ecommerce
+    note: Shopify reference theme, Online Store 2.0, accessibility built in
+
+  - url: https://github.com/medusajs/nextjs-starter-medusa
+    category: ecommerce
+    note: Next.js 15 + Medusa v2 open-source commerce backend
+
+  - url: https://github.com/saleor/react-storefront
+    category: ecommerce
+    note: Next.js App Router + GraphQL + Saleor API, end-to-end typed
+
+  # --- Admin dashboards ---
+  - url: https://github.com/PanJiaChen/vue-element-admin
+    category: admin
+    note: Most starred admin template, Vue 2 + Element UI, 40+ pages
+
+  - url: https://github.com/tabler/tabler
+    category: admin
+    note: Pure HTML/CSS Bootstrap 5, framework-agnostic, 4200+ icons
+
+  - url: https://github.com/ant-design/ant-design-pro
+    category: admin
+    note: React + Ant Design + UmiJS, Alibaba enterprise admin
+
+  # --- Java ---
+  - url: https://github.com/jhipster/generator-jhipster
+    category: java
+    note: Full-featured Java app generator, Spring Boot + Angular/React/Vue
+
+  - url: https://github.com/microservices-patterns/ftgo-application
+    category: java
+    note: Event-driven microservices reference, CQRS, Saga pattern
+
+  - url: https://github.com/thombergs/buckpal
+    category: java
+    note: Hexagonal Architecture reference, Clean Architecture book companion
+
+  - url: https://github.com/ali-bouali/spring-boot-3-jwt-security
+    category: java
+    note: Spring Boot 3 + Spring Security 6 + JWT with refresh tokens
+
+  - url: https://github.com/rohitghatol/spring-boot-microservices
+    category: java
+    note: API Gateway, OAuth 2.0, Eureka, Hystrix microservices reference
+
+  - url: https://github.com/SaiUpadhyayula/spring-boot-microservices
+    category: java
+    note: Modern Spring Boot 3, Keycloak, Kafka, Zipkin tracing
+
+  # --- .NET ---
+  - url: https://github.com/jasontaylordev/CleanArchitecture
+    category: dotnet
+    note: Most popular .NET template, EF Core, MediatR, CQRS
+
+  - url: https://github.com/ardalis/CleanArchitecture
+    category: dotnet
+    note: Minimalist Clean Architecture, specification pattern, ASP.NET Core 10
+
+  - url: https://github.com/amantinband/clean-architecture
+    category: dotnet
+    note: DDD, ErrorOr railway error handling, complex authorization
+
+  # --- PHP / Laravel ---
+  - url: https://github.com/laravel/laravel
+    category: php
+    note: Laravel framework scaffold, foundation for all Laravel projects
+
+  - url: https://github.com/filamentphp/filament
+    category: php
+    note: TALL stack admin panel builder, forms, tables, multi-tenancy
+
+  - url: https://github.com/rappasoft/laravel-boilerplate
+    category: php
+    note: Laravel + Bootstrap, user/role management, social auth, CRUD generators
+
+  - url: https://github.com/laravel/jetstream
+    category: php
+    note: Official full-featured Laravel starter, 2FA, teams, API via Sanctum
+
+  - url: https://github.com/laravel/breeze
+    category: php
+    note: Official minimal Laravel auth starter, Blade or Vue/React + Inertia
+
+  # --- Rails ---
+  - url: https://github.com/bullet-train-co/bullet_train
+    category: rails
+    note: Rails SaaS framework, Hotwire, teams/multitenancy, billing hooks
+
+  - url: https://github.com/templatus/templatus-hotwire
+    category: rails
+    note: Rails 8.1 + Hotwire, 100% Lighthouse, 117MB Docker image
+
+  # --- Go ---
+  - url: https://github.com/golang-standards/project-layout
+    category: go
+    note: Standard Go project structure convention, /cmd /internal /pkg
+
+  - url: https://github.com/Melkeydev/go-blueprint
+    category: go
+    note: CLI generator, pick HTTP framework + database, scaffolds project
+
+  - url: https://github.com/evrone/go-clean-template
+    category: go
+    note: Clean Architecture Go API, Gin, PostgreSQL, RabbitMQ, Swagger
+
+  - url: https://github.com/ThreeDotsLabs/wild-workouts-go-ddd-example
+    category: go
+    note: DDD + CQRS + Clean Architecture, gRPC + HTTP, full reference app
+
+  - url: https://github.com/ardanlabs/service
+    category: go
+    note: Production Go service, K8s configs, OpenTelemetry, Bill Kennedy
+
+  - url: https://github.com/go-kratos/kratos-layout
+    category: go
+    note: Kratos microservice framework layout, protobuf, wire DI
+
+  - url: https://github.com/wojciech12/my-ai-dev
+    category: go
+    note: AI-ready Go dev config, CLAUDE.md, agents, hooks, memory system
+
+  - url: https://github.com/FalcoSuessgott/golang-cli-template
+    category: go
+    note: Cobra + Viper CLI with GoReleaser, deb/rpm, shell completions
+
+  # --- Rust ---
+  - url: https://github.com/microsoft/cookiecutter-rust-actix-clean-architecture
+    category: rust
+    note: Actix Web + Diesel ORM, Onion Architecture, Microsoft-maintained
+
+  # --- Python ---
+  - url: https://github.com/tiangolo/full-stack-fastapi-postgresql
+    category: python
+    note: Gold standard FastAPI starter, SQLAlchemy, Celery, Docker, Traefik
+
+  - url: https://github.com/cookiecutter/cookiecutter-django
+    category: python
+    note: Django community default, Celery + Redis, Docker, 100% test target
+
+  - url: https://github.com/arthurhenrique/cookiecutter-fastapi
+    category: python
+    note: FastAPI + uv, ML project structure, GitHub Actions CI
+
+  # --- Node.js ---
+  - url: https://github.com/oclif/oclif
+    category: node
+    note: CLI framework and generator, TypeScript, plugins, ESM/CJS
+
+  - url: https://github.com/hagopj13/node-express-boilerplate
+    category: node
+    note: Most complete Express API starter, JWT, Joi, Docker, PM2
+
+  - url: https://github.com/remix-run/indie-stack
+    category: node
+    note: Remix + SQLite + Prisma, Fly.io deploy, Cypress E2E
+
+  - url: https://github.com/remix-run/blues-stack
+    category: node
+    note: Remix + PostgreSQL, multi-region Fly.io, production-grade
+
+  # --- AI / LLM ---
+  - url: https://github.com/vercel/ai-chatbot
+    category: ai-llm
+    note: Standard chatbot starter, Vercel AI SDK, multi-provider streaming
+
+  - url: https://github.com/langchain-ai/langchain-nextjs-template
+    category: ai-llm
+    note: Next.js + LangChain.js, chatbot + RAG + agents examples
+
+  - url: https://github.com/vstorm-co/full-stack-fastapi-nextjs-llm-template
+    category: ai-llm
+    note: AI-ready FastAPI + Next.js, PydanticAI, WebSocket streaming, CLAUDE.md
+
+  # --- Frontend ---
+  - url: https://github.com/antfu/vitesse
+    category: frontend
+    note: Vue 3 + Vite, file-based routing, UnoCSS, SSG, PWA, Anthony Fu
+
+  - url: https://github.com/vercel/platforms
+    category: frontend
+    note: Multi-tenant platform template, custom domains, Prisma, edge functions
+
+  - url: https://github.com/onwidget/astrowind
+    category: frontend
+    note: Astro 5 + Tailwind, marketing sites and landing pages
+
+  - url: https://github.com/scosman/CMSaasStarter
+    category: frontend
+    note: SvelteKit SaaS, Supabase auth, Stripe, perfect PageSpeed
+
+  - url: https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template
+    category: frontend
+    note: Next.js 14 landing page, Tailwind, Husky pre-commit
+
+  - url: https://github.com/surjithctly/astroship
+    category: frontend
+    note: Astro startup/SaaS landing page, hero/pricing/CTA blocks
+
+  - url: https://github.com/dan5py/turborepo-shadcn-ui
+    category: frontend
+    note: Turborepo monorepo + shared shadcn/ui component library
+
+  # --- Desktop ---
+  - url: https://github.com/electron-react-boilerplate/electron-react-boilerplate
+    category: desktop
+    note: Most used Electron starter, React, webpack, auto-updates
+
+  - url: https://github.com/agmmnn/tauri-ui
+    category: desktop
+    note: Tauri v2 + shadcn/ui, React/Next.js/SvelteKit, lightweight
+
+  - url: https://github.com/dannysmith/tauri-template
+    category: desktop
+    note: Tauri v2, React 19, multi-window, system tray, auto-updates
+
+  # --- Mobile ---
+  - url: https://github.com/infinitered/ignite
+    category: mobile
+    note: React Native + Expo, MobX-State-Tree, generators, 9 years maintained
+
+  - url: https://github.com/t3-oss/create-t3-turbo
+    category: mobile
+    note: Turborepo monorepo, Expo + Next.js, tRPC, shared types
+
+  - url: https://github.com/thecodingmachine/react-native-boilerplate
+    category: mobile
+    note: React Native + Redux Toolkit, clean architecture separation
+
+  - url: https://github.com/nalexn/clean-architecture-swiftui
+    category: mobile
+    note: SwiftUI + Clean Architecture, Combine, SwiftData, ViewInspector
+
+  - url: https://github.com/cortinico/kotlin-android-template
+    category: mobile
+    note: 100% Kotlin, 4 sample modules, Compose, detekt + ktlint
+
+  # --- Browser extensions ---
+  - url: https://github.com/wxt-dev/wxt
+    category: browser-ext
+    note: Extension framework, React/Vue/Svelte, hot reload, MV3, multi-browser
+
+  - url: https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite
+    category: browser-ext
+    note: React + Vite + Tailwind, HMR, content scripts, MV3
+
+  - url: https://github.com/antfu/vitesse-webext
+    category: browser-ext
+    note: Vue 3 + Vite extension starter, multi-browser, Anthony Fu
+
+  # --- Docs ---
+  - url: https://github.com/facebook/docusaurus
+    category: docs
+    note: Meta docs framework, React, MDX, versioned docs, Algolia search
+
+  - url: https://github.com/squidfunk/mkdocs-material
+    category: docs
+    note: Python docs, Material Design, best for Python teams
+
+  - url: https://github.com/vuejs/vitepress
+    category: docs
+    note: Vue 3 + Vite docs, fast builds, Markdown + Vue components
+
+  - url: https://github.com/withastro/starlight
+    category: docs
+    note: Astro docs, built-in search, i18n, fast and modern
+
+  # --- Infra ---
+  - url: https://github.com/aws-samples/aws-cdk-examples
+    category: infra
+    note: CDK patterns in TS/Python/Java/C#, VPCs, ECS, Lambda, S3
+
+  - url: https://github.com/pulumi/examples
+    category: infra
+    note: Multi-cloud IaC examples, AWS/Azure/GCP/K8s
+
+  - url: https://github.com/actions/typescript-action
+    category: infra
+    note: Official GitHub Actions template for custom TypeScript actions
+
+  - url: https://github.com/vercel/mcp-handler
+    category: infra
+    note: Official Vercel SDK for deploying MCP servers in Next.js/Nuxt on edge, Streamable HTTP + SSE, TypeScript
+
+  - url: https://github.com/vercel/next-devtools-mcp
+    category: infra
+    note: Official Vercel MCP for Next.js dev agents — Next.js upgrades, Cache Components, docs search, browser testing, runtime diagnostics; has own CLAUDE.md — add to all Next.js projects
+
+  - url: https://github.com/cloudflare/templates
+    category: infra
+    note: 34 Cloudflare Workers starters, D1, R2, Durable Objects, AI
+
+  - url: https://github.com/actions/javascript-action
+    category: infra
+    note: Official GitHub Actions template for JavaScript actions
+
+  - url: https://github.com/jetbridge/sst-prisma
+    category: infra
+    note: SST v2 + Prisma + Aurora Serverless, AppSync GraphQL, NextAuth
+
+  # --- Data science ---
+  - url: https://github.com/drivendata/cookiecutter-data-science
+    category: data-science
+    note: Standard data science project structure, Makefile, reproducible
+
+  # --- Knowledge ---
+  - url: https://github.com/voidashi/obsidian-vault-template
+    category: knowledge
+    note: Obsidian vault structure, properties system, daily notes
+
+  - url: https://github.com/gokhanarkan/minimal-second-brain
+    category: knowledge
+    note: AI-ready 3-folder Obsidian, MANIFEST.md with auto-update hooks
+
+ai-tools:
+  # --- MCP Building ---
+  - url: https://github.com/jlowin/fastmcp
+    category: mcp-building
+    note: De-facto Python MCP server framework (24k stars, ~70% of all MCP servers), v3 adds OTel/OAuth/authz — default for custom MCP server builds
+
+  # --- Registries ---
+  - url: https://github.com/sickn33/antigravity-awesome-skills
+    category: registry
+    note: 1326+ skills, cross-platform (11 tools), installer CLI
+
+  - url: https://github.com/davila7/claude-code-templates
+    category: registry
+    note: 600+ agents, 55+ MCPs, CLI installer, browse at aitmpl.com
+
+  - url: https://github.com/alirezarezvani/claude-skills
+    category: registry
+    note: 192 skills beyond coding — marketing, product, compliance, C-level
+
+  - url: https://github.com/Jeffallan/claude-skills
+    category: registry
+    note: 66 focused full-stack developer skills, quality over quantity
+
+  # --- Starter setups ---
+  - url: https://github.com/affaan-m/everything-claude-code
+    category: starter-setup
+    note: Most starred AI dev setup, instincts, memory, security, 997 tests
+
+  - url: https://github.com/FlorianBruniaux/claude-code-ultimate-guide
+    category: starter-setup
+    note: Production templates for every Claude Code feature, quizzes, cheatsheet
+
+  - url: https://github.com/centminmod/my-claude-code-setup
+    category: starter-setup
+    note: Memory bank CLAUDE.md pattern, context persistence across sessions
+
+  - url: https://github.com/Matt-Dionis/claude-code-configs
+    category: starter-setup
+    note: Real developer personal config collection, day-to-day structure
+
+  - url: https://github.com/bhancockio/claude-crash-course-templates
+    category: starter-setup
+    note: Project blueprint generator, masterplan.md from questionnaire
+
+  - url: https://github.com/TheDecipherist/claude-code-mastery-project-starter-kit
+    category: starter-setup
+    note: Pedagogical step-by-step agent configuration guide
+
+  - url: https://github.com/abhishekray07/claude-md-templates
+    category: starter-setup
+    note: Copy-paste CLAUDE.md files for Next.js/TS, Python/FastAPI, generic
+
+  # --- Marketing / SEO ---
+  - url: https://github.com/coreyhaines31/marketingskills
+    category: marketing-seo
+    note: Most popular non-coding skills, CRO/copywriting/SEO/analytics pods
+
+  - url: https://github.com/zubair-trabzada/geo-seo-claude
+    category: marketing-seo
+    note: GEO-first SEO, citability scoring, AI crawler analysis, PDF reports
+
+  - url: https://github.com/AgriciDaniel/claude-seo
+    category: marketing-seo
+    note: 13 sub-skills, 7 subagents, DataForSEO MCP, E-E-A-T assessment
+
+  - url: https://github.com/TheCraigHewitt/seomachine
+    category: marketing-seo
+    note: Long-form SEO blog content workspace, research + write + optimize
+
+  - url: https://github.com/zubair-trabzada/ai-marketing-claude
+    category: marketing-seo
+    note: 15 marketing skills, parallel subagents, client-ready PDF reports
+
+  - url: https://github.com/aaron-he-zhu/seo-geo-claude-skills
+    category: marketing-seo
+    note: 20 SEO/GEO skills, CORE-EEAT, works across 35+ AI agents
+
+  - url: https://github.com/kostja94/marketing-skills
+    category: marketing-seo
+    note: 160+ skills, 40+ page types, paid ads, framework-agnostic
+
+  # --- Content ---
+  - url: https://github.com/msitarzewski/agency-agents
+    category: content
+    note: Complete AI agency, specialized expert agents, most starred non-coding
+
+  - url: https://github.com/WomenDefiningAI/claudecode-writer
+    category: content
+    note: Idea to multi-format content pipeline, LinkedIn/newsletter/social
+
+  # --- Finance ---
+  - url: https://github.com/alpacahq/alpaca-mcp-server
+    category: finance
+    note: Official Alpaca MCP v2 (FastMCP + OpenAPI), stocks/crypto/options trading, Greeks/IV, portfolio history — install in your trading project (paper first)
+
+  - url: https://github.com/wshobson/maverick-mcp
+    category: finance
+    note: FastMCP 2.0 trading MCP, VectorBT backtesting, 20+ technical indicators, stock screening, portfolio correlation, Redis caching — evaluate for your trading project shadow-trade phase
+
+  - url: https://github.com/financial-datasets/mcp-server
+    category: finance
+    note: Financial Datasets API MCP — income statements, balance sheets, cash flow, stock prices, market news; free tier available — evaluate for your trading project fundamentals research
+
+  - url: https://github.com/EodHistoricalData/EODHD-MCP-Server
+    category: finance
+    note: 77-tool financial data MCP, historical/realtime/fundamentals/news/sentiment/technicals, 3 built-in prompt templates, OAuth v2 — most comprehensive financial data MCP; complements Alpaca MCP
+
+  - url: https://github.com/anthropics/financial-services-plugins
+    category: finance
+    note: Anthropic official financial analysis plugins, domain-specific commands
+
+  - url: https://github.com/AI4Finance-Foundation/FinRobot
+    category: finance
+    note: Open-source AI agent platform for financial analysis with LLMs
+
+  - url: https://github.com/crewAIInc/crewAI-examples
+    category: finance
+    note: Stock analysis crew — Data/Technical/Financial Advisor agents
+
+  # --- HR ---
+  - url: https://github.com/drukpa1455/crewai-job
+    category: hr
+    note: CrewAI job application automation, CV/cover letter customization
+
+  # --- Academic ---
+  - url: https://github.com/NirDiamant/GenAI_Agents
+    category: academic
+    note: 40+ agent tutorials as Jupyter notebooks, research workflows
+
+  - url: https://github.com/NirDiamant/agents-towards-production
+    category: academic
+    note: Production agent tutorials, observability, deployment, security
+
+  - url: https://github.com/pedrohcgs/claude-code-my-workflow
+    category: academic
+    note: Academic LaTeX/R workflow, multi-agent review, adversarial QA
+
+  # --- DevOps ---
+  - url: https://github.com/robusta-dev/robusta
+    category: devops
+    note: K8s alert enrichment, AI investigation on Prometheus alerts
+
+  - url: https://github.com/unskript/Awesome-CloudOps-Automation
+    category: devops
+    note: 200+ Python scripts, xRunBooks for AWS/GCP/K8s/PostgreSQL
+
+  - url: https://github.com/HolmesGPT/holmesgpt
+    category: devops
+    note: CNCF SRE agent, Prometheus/PagerDuty/K8s, natural language infra
+
+  # --- Security ---
+  - url: https://github.com/trufflesecurity/trufflehog
+    category: security
+    note: Secrets scanner, 700+ credential types, LLM-based verification
+
+  - url: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+    category: security
+    note: 734 YAML skills mapped to MITRE ATT&CK, most structured security set
+
+  - url: https://github.com/msoedov/agentic_security
+    category: security
+    note: LLM vulnerability scanner, 80k+ attack prompts, red-teaming
+
+  # --- Agent tools ---
+  - url: https://github.com/louislva/claude-peers-mcp
+    category: agent-tools
+    note: Inter-session Claude Code communication, SQLite broker, MCP server. Installed globally.
+
+  - url: https://github.com/googleworkspace/cli
+    category: agent-tools
+    note: One CLI for all Google Workspace APIs (Drive, Gmail, Calendar, Sheets). 23k stars, Rust, structured JSON. Pre-v1.0.
+
+  - url: https://github.com/karpathy/autoresearch
+    category: agent-tools
+    note: Autonomous ML experiment loop — modify/train/evaluate/keep. 63k stars. Pattern applicable to trading strategy optimization.
+
+  - url: https://github.com/HKUDS/CLI-Anything
+    category: agent-tools
+    note: Auto-generates CLI wrappers for desktop software (GIMP, Blender, etc.), making them agent-controllable. 26k stars, HKU.
+
+  # --- Agent orchestration ---
+  - url: https://github.com/ruvnet/ruflo
+    category: agent-orchestration
+    note: Multi-agent orchestration platform, agent swarms, RAG, Claude/Codex
+
+  - url: https://github.com/catlog22/Claude-Code-Workflow
+    category: agent-orchestration
+    note: JSON-driven multi-agent cadence-team, Gemini/Qwen/Codex orchestration
+
+  - url: https://github.com/Dicklesworthstone/claude_code_agent_farm
+    category: agent-orchestration
+    note: 20+ parallel Claude Code agents, tmux monitoring, lock coordination
+
+  # --- Curated lists ---
+  - url: https://github.com/ComposioHQ/awesome-claude-skills
+    category: curated-list
+    note: Curated Claude skills, resources, tools for workflow customization
+
+  - url: https://github.com/hesreallyhim/awesome-claude-code
+    category: curated-list
+    note: Skills, hooks, slash commands, orchestrators, plugins
+
+  - url: https://github.com/ashishpatel26/500-AI-Agents-Projects
+    category: curated-list
+    note: 500 AI agent use cases across healthcare, finance, education, retail
+
+  - url: https://github.com/VoltAgent/awesome-claude-code-subagents
+    category: curated-list
+    note: 100+ specialized subagents for research, analysis, development
+
+  - url: https://github.com/rohitg00/awesome-claude-code-toolkit
+    category: curated-list
+    note: 135 agents + 35 skills + 42 commands + 150 plugins + 19 hooks
+
+  - url: https://github.com/crewAIInc/awesome-crewai
+    category: curated-list
+    note: Community CrewAI projects across multiple domains
+
+  # --- Customer support ---
+  - url: https://github.com/botpress/botpress
+    category: customer-support
+    note: Full TypeScript helpdesk agent platform, NLU, visual conversation studio
+
+  - url: https://github.com/mem0ai/embedchain
+    category: customer-support
+    note: RAG framework, PDF/URL/YouTube/Notion connectors, chat templates
+
+  # --- Sales ---
+  - url: https://github.com/filip-michalsky/SalesGPT
+    category: sales
+    note: LangChain sales agent, configurable stages, objection handling
+
+  # --- Multi-agent (also listed under curated-list for crewAI-examples) ---
+  - url: https://github.com/EinGuterWaran/awesome-opensource-boilerplates
+    category: curated-list
+    note: Curated list of production-ready SaaS boilerplates and starters

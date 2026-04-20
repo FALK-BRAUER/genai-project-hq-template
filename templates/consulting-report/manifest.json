@@ -1,0 +1,31 @@
+{
+  "name": "consulting-report",
+  "description": "Client-facing consulting deliverable — discovery, analysis, recommendations",
+  "claude-code": {
+    "agents": [
+      "consulting/discovery.md",
+      "consulting/pricing-advisor.md",
+      "content/docs.md"
+    ],
+    "skills": [
+      "task/markitdown/SKILL.md",
+      "knowledge/pricing-domain/SKILL.md"
+    ],
+    "hooks": [],
+    "commands": [
+      "consulting/client-report.md",
+      "consulting/time-log.md"
+    ],
+    "mcps": [
+      "recipes/notion.sh"
+    ],
+    "plugins": []
+  },
+  "opencode": {
+    "description": "OpenCode configuration for cost-effective consulting work",
+    "config": "opencode/opencode.json",
+    "instructions": "AGENTS.md.opencode.template",
+    "agents": [],
+    "plugins": []
+  }
+}

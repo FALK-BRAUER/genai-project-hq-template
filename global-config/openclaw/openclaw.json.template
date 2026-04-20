@@ -1,0 +1,99 @@
+{
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "openclaw",
+    "ssrfPolicy": {
+      "dangerouslyAllowPrivateNetwork": false
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "anthropic/claude-sonnet-4-6"
+      },
+      "sandbox": {
+        "mode": "off"
+      }
+    }
+  },
+  "tools": {
+    "profile": "messaging",
+    "deny": [
+      "group:automation",
+      "group:runtime",
+      "sessions_spawn",
+      "sessions_send"
+    ],
+    "elevated": {
+      "enabled": false
+    },
+    "exec": {
+      "host": "sandbox",
+      "security": "deny",
+      "ask": "always"
+    },
+    "fs": {
+      "workspaceOnly": true
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "allowlist",
+      "botToken": "<KEYCHAIN: security find-generic-password -s OPENCLAW_TELEGRAM_BOT_TOKEN -w>",
+      "allowFrom": [
+        "YOUR_TELEGRAM_CHAT_ID"
+      ],
+      "groupPolicy": "allowlist",
+      "streaming": "partial"
+    }
+  },
+  "gateway": {
+    "port": 29741,
+    "mode": "local",
+    "bind": "loopback",
+    "controlUi": {
+      "dangerouslyAllowHostHeaderOriginFallback": false,
+      "allowInsecureAuth": false,
+      "dangerouslyDisableDeviceAuth": false
+    },
+    "auth": {
+      "mode": "token",
+      "token": "<KEYCHAIN: security find-generic-password -a claw -s OPENCLAW_GATEWAY_TOKEN -w>"
+    }
+  },
+  "mcp": {
+    "servers": {
+      "thunderbird-mcp": {
+        "command": "node",
+        "args": [
+          "/Users/YOUR_AGENT_USER/thunderbird-mcp/mcp-bridge.cjs"
+        ]
+      },
+      "jina-reader": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "mcp-remote",
+          "https://mcp.jina.ai/v1",
+          "--header",
+          "Authorization: Bearer <KEYCHAIN: jina api key>"
+        ]
+      },
+      "playwright": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@playwright/mcp",
+          "--headless"
+        ]
+      }
+    }
+  }
+}

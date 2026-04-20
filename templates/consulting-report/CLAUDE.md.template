@@ -1,0 +1,28 @@
+# CLAUDE.md — {{PROJECT_NAME}}
+
+## Overview
+[Client name, engagement type, objective]
+
+## Deliverables
+- [ ] Discovery report
+- [ ] Recommendations document
+- [ ] Implementation roadmap
+- [ ] Cost estimate
+
+## Client Context
+[Industry, company size, current tech stack, key stakeholders]
+
+## Constraints
+[Budget, timeline, compliance requirements, team capacity]
+
+## Current Focus
+[Updated after each work session]
+
+## Files
+- `discovery/` — interview notes, current state analysis
+- `analysis/` — findings, data analysis
+- `deliverables/` — client-facing documents
+- `TIME-LOG.md` — time tracking
+
+---
+*Scaffolded from consulting-report template on {{CREATED_DATE}}*

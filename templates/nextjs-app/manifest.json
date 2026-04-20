@@ -1,0 +1,41 @@
+{
+  "name": "nextjs-app",
+  "description": "Full-stack Next.js application with App Router, Prisma, and Tailwind CSS",
+  "claude-code": {
+    "agents": [
+      "coding/backend.md",
+      "coding/frontend.md",
+      "content/docs.md",
+      "devops/vercel.md"
+    ],
+    "skills": [
+      "knowledge/nextjs-patterns/SKILL.md",
+      "knowledge/prisma-domain/SKILL.md"
+    ],
+    "hooks": [
+      "quality/prettier-format.json",
+      "gates/test-before-commit.json",
+      "gates/secret-scanner.json",
+      "hints/architecture-hint.json",
+      "hints/test-reminder.json"
+    ],
+    "commands": [
+      "workflow/deploy-check.md",
+      "quality/test-coverage.md",
+      "quality/lint-fix.md"
+    ],
+    "mcps": [
+      "recipes/vercel.sh"
+    ],
+    "plugins": [
+      "playground@claude-plugins-official"
+    ]
+  },
+  "opencode": {
+    "description": "OpenCode configuration for cost-effective development using Alibaba Coding Plan",
+    "config": "opencode/opencode.json",
+    "instructions": "AGENTS.md.opencode.template",
+    "agents": [],
+    "plugins": []
+  }
+}

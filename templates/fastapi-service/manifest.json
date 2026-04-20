@@ -1,0 +1,35 @@
+{
+  "name": "fastapi-service",
+  "description": "Python FastAPI service with PostgreSQL and async patterns",
+  "claude-code": {
+    "agents": [
+      "coding/backend.md",
+      "content/api-docs.md",
+      "quality/tester.md"
+    ],
+    "skills": [
+      "orchestration/tdd/SKILL.md",
+      "task/dependency-audit/SKILL.md"
+    ],
+    "hooks": [
+      "quality/black-format.json",
+      "gates/test-before-commit.json",
+      "gates/secret-scanner.json"
+    ],
+    "commands": [
+      "workflow/deploy-check.md",
+      "quality/security-scan.md"
+    ],
+    "mcps": [
+      "recipes/postgres.sh"
+    ],
+    "plugins": []
+  },
+  "opencode": {
+    "description": "OpenCode configuration for cost-effective FastAPI development",
+    "config": "opencode/opencode.json",
+    "instructions": "AGENTS.md.opencode.template",
+    "agents": [],
+    "plugins": []
+  }
+}

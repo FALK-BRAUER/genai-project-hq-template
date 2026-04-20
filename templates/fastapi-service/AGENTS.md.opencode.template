@@ -1,0 +1,29 @@
+# AGENTS.md — Project-Specific (OpenCode)
+
+## Project Identity
+This is a [PROJECT_NAME] FastAPI service. All code follows the global YOUR_NAME standards from `~/.config/opencode/AGENTS.md`.
+
+## Project-Specific Rules
+- API endpoints in `app/routes/`
+- Database models in `app/models/`
+- Database schemas in `app/schemas/`
+- Configuration in `app/config.py`
+- Tests in `tests/` mirroring `app/` structure
+- Use Black for code formatting (auto-run on save)
+- Run tests after changes: `pytest`
+
+## Stack Confirmation
+- **Framework:** FastAPI + Uvicorn
+- **Database:** PostgreSQL + SQLAlchemy ORM
+- **Migrations:** Alembic
+- **Validation:** Pydantic
+- **Testing:** Pytest + responses (HTTP mocking)
+- **Code Quality:** Black, Flake8, mypy
+
+## CI/CD
+- Tests run on every push to main
+- Linting enforced pre-commit
+- Docker image auto-builds on release
+
+## Contact
+Questions about project setup? Check README.md or ask YOUR_NAME directly.

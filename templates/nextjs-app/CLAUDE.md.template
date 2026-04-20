@@ -1,0 +1,32 @@
+# CLAUDE.md — {{PROJECT_NAME}}
+
+## Overview
+[What this project does, who it's for, why it exists]
+
+## Tech Stack
+- Next.js 15 (App Router), TypeScript, Tailwind CSS, shadcn/ui
+- PostgreSQL + Prisma ORM
+- Vitest + React Testing Library
+- Deployed on Vercel
+
+## Build & Test
+- Install: `npm install`
+- Dev: `npm run dev`
+- Test: `npm test`
+- Lint: `npm run lint`
+- Build: `npm run build`
+
+## Architecture
+See ARCHITECTURE.md for Mermaid diagrams.
+
+## Current Focus
+[Updated after each work session]
+
+## Known Issues
+[Active bugs, tech debt]
+
+## Domain Rules
+[Business logic Claude needs to understand]
+
+---
+*Scaffolded from nextjs-app template on {{CREATED_DATE}}*

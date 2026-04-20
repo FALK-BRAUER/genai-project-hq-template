@@ -1,0 +1,14 @@
+{
+  "event": "PreToolUse",
+  "description": "Block git commit if lint errors exist",
+  "hooks": [
+    {
+      "matcher": "Bash(git commit*)",
+      "hooks": [{
+        "type": "command",
+        "command": "npm run lint --if-present 2>&1 | tail -10",
+        "blocking": true
+      }]
+    }
+  ]
+}

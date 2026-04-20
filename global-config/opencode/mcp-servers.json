@@ -1,0 +1,66 @@
+{
+  "mcp": {
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {}
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "env": {}
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "env": {}
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp"],
+      "env": {}
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "$HOME/projects", "$HOME/projects/hq"],
+      "env": {}
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "jina-reader": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.jina.ai/v1"],
+      "env": {}
+    },
+    "magic": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic-mcp@latest"],
+      "env": {
+        "API_KEY": "${MAGIC_API_KEY}"
+      }
+    },
+    "markitdown": {
+      "command": "uvx",
+      "args": ["markitdown-mcp"],
+      "env": {}
+    },
+    "pal": {
+      "command": "bash",
+      "args": ["-c", "for p in $(which uvx 2>/dev/null) $HOME/.local/bin/uvx /opt/homebrew/bin/uvx /usr/local/bin/uvx uvx; do [ -x \"$p\" ] && exec \"$p\" --from git+https://github.com/BeehiveInnovations/pal-mcp-server.git pal-mcp-server; done; echo 'uvx not found' >&2; exit 1"],
+      "env": {
+        "CUSTOM_API_KEY": "${ALIBABA_CODING_PLAN_KEY}",
+        "CUSTOM_API_URL": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+        "CUSTOM_MODEL_NAME": "qwen3.5-plus",
+        "CUSTOM_MODELS_CONFIG_PATH": "$HOME/projects/hq/global-config/pal/custom_models.json",
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}",
+        "DISABLED_TOOLS": "analyze,refactor,testgen,secaudit,docgen,tracer",
+        "DEFAULT_MODEL": "auto"
+      }
+    }
+  }
+}

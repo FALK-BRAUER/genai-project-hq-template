@@ -1,0 +1,11 @@
+{
+  "event": "PostToolUse",
+  "description": "Warn when context usage is getting high",
+  "hooks": [
+    {
+      "matcher": "*",
+      "hooks": [{"type": "command", "command": "echo 'Consider running /compact if context feels bloated'", "blocking": false}]
+    }
+  ],
+  "note": "This is a template — in practice, use Claude Code's built-in context monitoring or a custom script that checks token usage"
+}

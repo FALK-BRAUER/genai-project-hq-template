@@ -1,0 +1,10 @@
+{
+  "event": "PostToolUse",
+  "description": "Auto-format Python files after write",
+  "hooks": [
+    {
+      "matcher": "Write(*.py)",
+      "hooks": [{"type": "command", "command": "python -m black $file"}]
+    }
+  ]
+}

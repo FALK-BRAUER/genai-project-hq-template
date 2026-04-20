@@ -1,0 +1,106 @@
+{
+  "_README": {
+    "description": "Model metadata for DashScope (Alibaba) via OpenAI-compatible endpoint.",
+    "documentation": "https://github.com/BeehiveInnovations/pal-mcp-server/blob/main/docs/custom_models.md"
+  },
+  "models": [
+    {
+      "model_name": "qwen3.5-plus",
+      "aliases": ["qwen", "dashscope"],
+      "context_window": 131072,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": false,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": false,
+      "description": "Alibaba Qwen 3.5 Plus — latest gen, strongest general-purpose",
+      "intelligence_score": 16
+    },
+    {
+      "model_name": "qwen3.5-flash",
+      "aliases": ["qwen-flash", "dashscope-flash"],
+      "context_window": 131072,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": false,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": false,
+      "description": "Alibaba Qwen 3.5 Flash — fast and cheap, latest gen",
+      "intelligence_score": 12
+    },
+    {
+      "model_name": "qwen-plus",
+      "aliases": ["qwen-plus"],
+      "context_window": 131072,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": false,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": true,
+      "max_image_size_mb": 10.0,
+      "description": "Alibaba Qwen Plus — solid mid-tier, multimodal, 131K context",
+      "intelligence_score": 13
+    },
+    {
+      "model_name": "deepseek-v3.2",
+      "aliases": ["deepseek", "ds"],
+      "context_window": 131072,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": false,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": false,
+      "description": "DeepSeek V3.2 on DashScope — strong coder and reasoner",
+      "intelligence_score": 16
+    },
+    {
+      "model_name": "qwq-plus",
+      "aliases": ["qwq", "reasoning"],
+      "context_window": 131072,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": true,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": false,
+      "description": "Alibaba QwQ Plus — reasoning model (like o1/o3)",
+      "intelligence_score": 17
+    },
+    {
+      "model_name": "qwen-coder-plus",
+      "aliases": ["coder", "qwen-coder"],
+      "context_window": 131072,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": false,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": false,
+      "description": "Alibaba Qwen Coder Plus — code-specialized model",
+      "intelligence_score": 14
+    },
+    {
+      "model_name": "qwen-vl-max",
+      "aliases": ["vision", "qwen-vision"],
+      "context_window": 32768,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": false,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": true,
+      "max_image_size_mb": 20.0,
+      "description": "Alibaba Qwen VL Max — best vision model on DashScope",
+      "intelligence_score": 15
+    },
+    {
+      "model_name": "qwen-turbo",
+      "aliases": ["turbo", "cheap"],
+      "context_window": 131072,
+      "max_output_tokens": 16384,
+      "supports_extended_thinking": false,
+      "supports_json_mode": true,
+      "supports_function_calling": true,
+      "supports_images": false,
+      "description": "Alibaba Qwen Turbo — cheapest option, 131K context",
+      "intelligence_score": 10
+    }
+  ]
+}

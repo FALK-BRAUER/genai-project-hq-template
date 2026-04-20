@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Coding HQ — Architecture</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1e2530;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #7ee787;
+    --accent3: #ffa657;
+    --accent4: #ff7b72;
+    --accent5: #d2a8ff;
+    --tag-bg: #1f2937;
+    --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 40%, #1a2332 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 48px;
+    text-align: center;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(88,166,255,0.1);
+    border: 1px solid rgba(88,166,255,0.3);
+    color: var(--accent);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    font-size: clamp(15px, 2.5vw, 18px);
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 28px;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+  .hero-meta span {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+  .hero-meta span b { color: var(--text); }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .toc-inner {
+    display: inline-flex;
+    gap: 0;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .toc a {
+    display: inline-block;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .toc a:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 36px 0 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h3 .num {
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent3);
+    margin: 24px 0 8px;
+    font-family: var(--font-mono);
+  }
+  p { margin-bottom: 14px; color: #c9d1d9; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── INTRO CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-icon { font-size: 24px; margin-bottom: 10px; }
+  .card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 6px;
+    font-family: var(--font-sans);
+  }
+  .card p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── SPEC PILLS ── */
+  .specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0;
+  }
+  .spec {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-family: var(--font-mono);
+  }
+  .spec .label { color: var(--muted); font-size: 11px; display: block; margin-bottom: 2px; }
+  .spec .val { color: var(--accent2); font-weight: 600; }
+
+  /* ── CODE/TREE ── */
+  pre {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #c9d1d9;
+    margin: 16px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: rgba(110,118,129,0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent3);
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+  .tree-comment { color: var(--muted); }
+  .tree-dir { color: var(--accent); }
+  .tree-file { color: var(--text); }
+  .tree-key { color: var(--accent2); }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 20px;
+    margin: 24px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 8px;
+  }
+  .flow-node {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-family: var(--font-mono);
+    text-align: center;
+    min-width: 130px;
+  }
+  .flow-node.accent { border-color: var(--accent); color: var(--accent); }
+  .flow-node.green { border-color: var(--accent2); color: var(--accent2); }
+  .flow-node.orange { border-color: var(--accent3); color: var(--accent3); }
+  .flow-node.purple { border-color: var(--accent5); color: var(--accent5); }
+  .flow-node.red { border-color: var(--accent4); color: var(--accent4); }
+  .flow-arrow {
+    color: var(--muted);
+    font-size: 18px;
+    padding: 0 8px;
+    white-space: nowrap;
+  }
+  .flow-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    text-align: center;
+    margin-top: -4px;
+    margin-bottom: 8px;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 16px 0; -webkit-overflow-scrolling: touch; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 500px;
+  }
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    vertical-align: top;
+    font-size: 13px;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-family: var(--font-mono); color: var(--accent3); white-space: nowrap; }
+  td .time { color: var(--accent2); font-family: var(--font-mono); font-size: 12px; }
+
+  /* ── STEP LIST ── */
+  .steps { margin: 16px 0; }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-body strong { color: var(--accent3); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: rgba(88,166,255,0.06);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  .callout.green { border-color: var(--accent2); background: rgba(126,231,135,0.06); }
+  .callout.orange { border-color: var(--accent3); background: rgba(255,166,87,0.06); }
+  .callout.purple { border-color: var(--accent5); background: rgba(210,168,255,0.06); }
+
+  /* ── SYSTEM CARDS ── */
+  .system-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .sys-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .sys-card .sys-icon { font-size: 20px; margin-bottom: 8px; }
+  .sys-card .sys-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .sys-card .sys-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ── PROJECT PILLS ── */
+  .project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .proj {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .proj .proj-name { font-family: var(--font-mono); color: var(--accent); font-size: 13px; }
+  .proj .proj-stack { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── WORKFLOW BOX ── */
+  .workflow {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .workflow-header {
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .workflow-header .wf-icon { font-size: 16px; }
+  .workflow-header .wf-title { font-size: 14px; font-weight: 600; }
+  .workflow-header .wf-badge {
+    margin-left: auto;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    background: rgba(88,166,255,0.15);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .workflow-body { padding: 18px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  /* ── TAG ── */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--muted);
+    margin: 2px;
+  }
+  .tag.blue { color: var(--accent); border-color: rgba(88,166,255,0.3); background: rgba(88,166,255,0.08); }
+  .tag.green { color: var(--accent2); border-color: rgba(126,231,135,0.3); background: rgba(126,231,135,0.08); }
+  .tag.orange { color: var(--accent3); border-color: rgba(255,166,87,0.3); background: rgba(255,166,87,0.08); }
+  .tag.purple { color: var(--accent5); border-color: rgba(210,168,255,0.3); background: rgba(210,168,255,0.08); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 32px; }
+    section { padding: 44px 0 36px; }
+    .container { padding: 0 16px; }
+    h3 { font-size: 16px; }
+    pre { font-size: 12px; padding: 14px; }
+    .flow-node { min-width: 100px; padding: 8px 10px; font-size: 12px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .system-grid { grid-template-columns: 1fr 1fr; }
+    .toc a { padding: 12px 12px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">Meta-Project Architecture</div>
+  <h1>Vibe Coding <span>HQ</span></h1>
+  <p>The central nervous system for all vibe coding infrastructure — scaffolding, config, learnings, and automated maintenance across every active project.</p>
+  <div class="hero-meta">
+    <span><span class="label">Host</span><b>YOUR_HARDWARE</b></span>
+    <span><span class="label">Path</span><b>~/hq</b></span>
+    <span><span class="label">Account</span><b>YOUR_USER</b></span>
+    <span><span class="label">Updated</span><b>2026-04-02</b></span>
+  </div>
+</div>
+
+<!-- TOC -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#overview">Overview</a>
+    <a href="#projects">Projects</a>
+    <a href="#systems">Systems</a>
+    <a href="#directory">Directory</a>
+    <a href="#automation">Automation</a>
+    <a href="#workflows">Workflows</a>
+    <a href="#openclaw">OpenClaw</a>
+    <a href="#dataflow">Data Flow</a>
+    <a href="#keyfiles">Key Files</a>
+    <a href="#marketintel">Market Intel</a>
+  </div>
+</nav>
+
+<!-- OVERVIEW -->
+<section id="overview">
+<div class="container">
+  <div class="section-label">01 — Overview</div>
+  <h2>What is Vibe HQ?</h2>
+  <p>Vibe HQ is the meta-project that sits above all other coding projects. It does not ship product — it governs the infrastructure that every product project inherits from. Think of it as the "platform team" for a one-person AI-augmented dev shop.</p>
+  <p>Every project that gets spun up comes pre-wired with agents, hooks, skills, MCPs, and a CLAUDE.md — not because they were configured manually, but because vibe-hq scaffolded them from templates. When the templates improve, future projects get the improvement. When a project discovers something worth keeping, vibe-hq harvests it and promotes it into the library.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🏗️</div>
+      <h4>Project Scaffolding</h4>
+      <p>Spawn new projects from templates with pre-wired agents, hooks, skills, MCPs, and CLAUDE.md in one command.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <h4>Config Source of Truth</h4>
+      <p>All global Claude Code and OpenCode configs live here, versioned and deployable via <code>install-global.sh</code>.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h4>Learnings Flow</h4>
+      <p>Daily harvest job reads every project, finds drift vs library, reports for human promotion. Knowledge compounds.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📚</div>
+      <h4>Reference Library</h4>
+      <p>~150 curated GitHub repos across 30+ categories. Auto-refreshed daily by Qwen as a research database.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <h4>Automated Maintenance</h4>
+      <p>8 launchd jobs run daily/weekly: heartbeat, config drift, learning harvest, planning digest, reference refresh, doctor, toolkit scout, privacy audit.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h4>OpenClaw Config</h4>
+      <p>Identity, rules, and config for the autonomous 24/7 agent running on the <code>claw</code> macOS account.</p>
+    </div>
+  </div>
+
+  <div class="specs">
+    <div class="spec"><span class="label">Scheduler</span><span class="val">launchd + Lingon Pro 10</span></div>
+    <div class="spec"><span class="label">AI clients</span><span class="val">Claude Code + OpenCode</span></div>
+    <div class="spec"><span class="label">Notifications</span><span class="val">Telegram Bot</span></div>
+    <div class="spec"><span class="label">Issue tracking</span><span class="val">GitHub Issues</span></div>
+    <div class="spec"><span class="label">Secrets</span><span class="val">macOS Keychain</span></div>
+    <div class="spec"><span class="label">AI models</span><span class="val">Claude · Qwen · Gemini</span></div>
+  </div>
+</div>
+</section>
+
+<!-- ACTIVE PROJECTS -->
+<section id="projects">
+<div class="container">
+  <div class="section-label">02 — Managed Projects</div>
+  <h2>Active Project Registry</h2>
+  <p>Vibe HQ tracks every active project in <code>registry/active/</code>. Each entry is a single Markdown file capturing status, stack, deployed config, and outstanding ideas. This registry is the source of truth for all automated scripts.</p>
+
+  <div class="project-list">
+    <div class="proj">
+      <div class="proj-name">fintrack</div>
+      <div class="proj-stack">AI trading · IBKR/Alpaca · S$200k</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">LinkedInOrganiser</div>
+      <div class="proj-stack">Next.js · content pipeline</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">blogs</div>
+      <div class="proj-stack">Ghost CMS · content</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">camel-cpq</div>
+      <div class="proj-stack">Java · Apache Camel · CPQ</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">contracts-work</div>
+      <div class="proj-stack">Consulting · legal ops</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">your-project-b</div>
+      <div class="proj-stack">YOUR_STACK · business dev</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">your-project-c</div>
+      <div class="proj-stack">Google Drive · document ops</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">claw-pa</div>
+      <div class="proj-stack">Personal assistant · OpenClaw</div>
+    </div>
+    <div class="proj">
+      <div class="proj-name">openclaw</div>
+      <div class="proj-stack">Autonomous agent · 24/7</div>
+    </div>
+  </div>
+
+  <h4>Registry Entry Format</h4>
+  <p>Every registry entry documents the same fields so any automated script or Claude session can understand the project without reading its code:</p>
+
+  <pre><span class="tree-comment"># registry/active/fintrack.md</span>
+<span class="tree-key">Status:</span>      active
+<span class="tree-key">Template:</span>    nextjs-app
+<span class="tree-key">Created:</span>     2025-11-14
+<span class="tree-key">Path:</span>        ~/projects/fintrack
+<span class="tree-key">Repo:</span>        FALK-BRAUER/fintrack
+
+<span class="tree-key">## Purpose</span>
+AI-augmented trading platform. S$200k live capital.
+IBKR for live trading, Alpaca for paper trades.
+Shadow trades phase — no auto-execution yet.
+
+<span class="tree-key">## Stack</span>
+Next.js, TypeScript, PostgreSQL+Prisma, Redis,
+Anthropic Claude API, IBKR TWS, Alpaca API
+
+<span class="tree-key">## Deployed Config</span>
+Agents: backend.md, tester.md
+Skills: fintrack-domain, claude-api, prisma-domain
+Hooks:  trufflehog (pre-commit), prettier (post-write)
+MCPs:   postgres, github, memory
+
+<span class="tree-key">## Outstanding Ideas</span>
+- Sentiment analysis on news feed
+- Weekly P&amp;L digest via Telegram</pre>
+
+  <div class="callout green">
+    <strong>Lifecycle:</strong> <code>/new-project</code> → creates entry in <code>registry/active/</code>, scaffolds the project directory, installs all config. <code>/archive &lt;name&gt;</code> → moves to <code>registry/archived/</code>, cleans up automation references.
+  </div>
+</div>
+</section>
+
+<!-- CORE SYSTEMS -->
+<section id="systems">
+<div class="container">
+  <div class="section-label">03 — Core Systems</div>
+  <h2>Nine Interconnected Systems</h2>
+  <p>Vibe HQ is built from nine systems that work together. Each system has a clear responsibility and hands off to others through well-defined interfaces.</p>
+
+  <div class="system-grid">
+    <div class="sys-card"><div class="sys-icon">📋</div><div class="sys-name">Project Registry</div><div class="sys-desc">Single source of truth for every project's stack, status, and config</div></div>
+    <div class="sys-card"><div class="sys-icon">🏛️</div><div class="sys-name">Templates</div><div class="sys-desc">Manifests that declare what to install when scaffolding a project</div></div>
+    <div class="sys-card"><div class="sys-icon">📦</div><div class="sys-name">Library</div><div class="sys-desc">Versioned agents, skills, hooks, commands, MCPs, reference pages</div></div>
+    <div class="sys-card"><div class="sys-icon">🌐</div><div class="sys-name">Global Config</div><div class="sys-desc">settings.json, CLAUDE.md, mcp-servers.json for the YOUR_USER account</div></div>
+    <div class="sys-card"><div class="sys-icon">🧠</div><div class="sys-name">Learnings Flow</div><div class="sys-desc">Harvest → report → human promotion pipeline</div></div>
+    <div class="sys-card"><div class="sys-icon">📚</div><div class="sys-name">Reference Library</div><div class="sys-desc">~150 repos, auto-refreshed daily by Qwen</div></div>
+    <div class="sys-card"><div class="sys-icon">🔍</div><div class="sys-name">Drift Detection</div><div class="sys-desc">Daily scan for projects that have diverged from standards</div></div>
+    <div class="sys-card"><div class="sys-icon">⏰</div><div class="sys-name">Scheduling</div><div class="sys-desc">8 launchd jobs, Lingon Pro, silent-success/notify-on-failure</div></div>
+    <div class="sys-card"><div class="sys-icon">🤖</div><div class="sys-name">OpenClaw</div><div class="sys-desc">24/7 autonomous agent on the claw account</div></div>
+  </div>
+
+  <!-- Templates -->
+  <h3><span class="num">1</span> Templates System</h3>
+  <p>Three templates cover the main project archetypes. Each template is a <code>manifest.json</code> plus CLAUDE.md and AGENTS.md templates. The manifest declares component references into the library — not copies of files.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Template</th><th>Use Case</th><th>Key Components</th></tr></thead>
+    <tbody>
+      <tr><td>nextjs-app</td><td>Full-stack web product</td><td>backend agent, frontend agent, tester, prettier hook, trufflehog, prisma-domain skill</td></tr>
+      <tr><td>fastapi-service</td><td>Python microservice or data API</td><td>backend agent, tester, black formatter, trufflehog, semgrep</td></tr>
+      <tr><td>consulting-report</td><td>Client-facing deliverables</td><td>discovery agent, pricing-advisor agent, client-report command, branded-docs skill</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout orange">
+    <strong>Key design decision:</strong> Templates reference library paths, not bundled copies. So when <code>library/skills/knowledge/prisma-domain/</code> is updated, the next <code>/new-project</code> gets the improved version automatically. Existing projects keep their installed snapshot.
+  </div>
+
+  <!-- Library -->
+  <h3><span class="num">2</span> The Library</h3>
+  <p>The library is the versioned store that templates draw from. It's organized by component type, not by project.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Path</th><th>Contents</th><th>Count</th></tr></thead>
+    <tbody>
+      <tr><td>library/agents/</td><td>Subagent definitions: coding, consulting, content, devops, quality, workflow</td><td>~9</td></tr>
+      <tr><td>library/skills/</td><td>business-ops, knowledge, orchestration, task categories</td><td>~38</td></tr>
+      <tr><td>library/hooks/</td><td>gates (secret-scanner, test-before-commit), hints, quality, session</td><td>~8</td></tr>
+      <tr><td>library/commands/</td><td>consulting, quality, workflow slash commands</td><td>~7</td></tr>
+      <tr><td>library/mcps/</td><td>catalog.md, install recipes, opencode helper</td><td>~16 MCPs</td></tr>
+      <tr><td>library/references/</td><td>GitHub repo detail pages by category</td><td>~150</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Global Config -->
+  <h3><span class="num">3</span> Global Config</h3>
+  <p>Everything under <code>global-config/</code> is the versioned source of truth for what lives in <code>~/.claude/</code> on the machine. Deploy with <code>scripts/install-global.sh</code>.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>File</th><th>What It Controls</th></tr></thead>
+    <tbody>
+      <tr><td>claude-code/settings.json</td><td>Permissions allow/deny, global hooks (Prettier, Trufflehog, semgrep, GSD context monitor), enabled plugins</td></tr>
+      <tr><td>claude-code/CLAUDE.md</td><td>YOUR_USER's global identity, coding standards, behavior rules, preferred stack — inherited by all sessions</td></tr>
+      <tr><td>claude-code/mcp-servers.json</td><td>8 global MCPs: memory, sequential-thinking, context7, chrome-devtools, filesystem, github, jina-reader, pal</td></tr>
+      <tr><td>opencode/mcp-servers.json</td><td>Mirror of above in OpenCode JSON schema</td></tr>
+      <tr><td>openclaw/SOUL.md</td><td>OpenClaw agent identity, hard rules, email/calendar/coding constraints</td></tr>
+      <tr><td>pal/custom_models.json</td><td>PAL MCP model registry: Qwen, Gemini aliases</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Learnings -->
+  <h3><span class="num">4</span> Learnings Flow</h3>
+  <p>This is the knowledge compounding mechanism. Projects discover better patterns. Vibe HQ notices. A human decides what's worth keeping. The library improves.</p>
+
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">🤖</span>
+      <span class="wf-title">Automated Daily Harvest</span>
+      <span class="wf-badge">02:15 SGT · com.vibe-hq.learning-harvest</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Claude reads every active project</strong> — iterates <code>registry/active/</code>, opens each project's CLAUDE.md, <code>.claude/settings.json</code>, agents, skills, and commands.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Compare against library</strong> — identifies: new project-level components not in the library (promotion candidates), CLAUDE.md changes that should update the registry, new MCPs that aren't catalogued.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Write harvest log</strong> — findings go to <code>tools/logs/harvest-YYYY-MM-DD.md</code>. If nothing changed, writes "## No Changes".</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Notify if drift found</strong> — sends Telegram notification only when there's something to review. Silent on clean runs. Commits the log file.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">👤</span>
+      <span class="wf-title">Manual Sync</span>
+      <span class="wf-badge">Human-triggered · /sync</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body">Copies <code>LEARNINGS.md</code> from each active project → <code>learnings/per-project/</code></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body">Compares project configs against template manifests, reports drift and promotion candidates</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body">Human reviews findings, manually promotes to <code>library/</code></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Promotion is always human-gated.</strong> The harvest reports what it finds. A human session in vibe-hq decides whether a pattern is worth generalising. This keeps the library high-signal and prevents automated noise accumulation.
+  </div>
+</div>
+</section>
+
+<!-- DIRECTORY -->
+<section id="directory">
+<div class="container">
+  <div class="section-label">04 — Directory Structure</div>
+  <h2>Full Tree</h2>
+  <p>Every directory has a clear, non-overlapping purpose. Nothing is dumped in root.</p>
+<pre>
+<span class="tree-dir">~/vibe-hq/</span>
+<span class="tree-dir">├── .claude/</span>
+<span class="tree-comment">│   ├── commands/</span>         <span class="tree-comment"># /new-project, /sync, /doctor, /list-projects, /archive</span>
+<span class="tree-comment">│   └── settings.local.json</span>
+│
+<span class="tree-dir">├── registry/</span>
+<span class="tree-dir">│   ├── active/</span>           <span class="tree-comment"># One .md per active project (source of truth)</span>
+<span class="tree-dir">│   └── archived/</span>         <span class="tree-comment"># Retired projects</span>
+│
+<span class="tree-dir">├── templates/</span>
+<span class="tree-dir">│   ├── nextjs-app/</span>        <span class="tree-comment"># manifest.json + CLAUDE.md.template + AGENTS.md.template</span>
+<span class="tree-dir">│   ├── fastapi-service/</span>
+<span class="tree-dir">│   └── consulting-report/</span>
+│
+<span class="tree-dir">├── library/</span>
+<span class="tree-dir">│   ├── agents/</span>            <span class="tree-comment"># coding/, consulting/, content/, devops/, quality/, workflow/</span>
+<span class="tree-dir">│   ├── skills/</span>            <span class="tree-comment"># business-ops/, knowledge/, orchestration/, task/, _candidates/</span>
+<span class="tree-dir">│   ├── hooks/</span>             <span class="tree-comment"># gates/, hints/, quality/, session/</span>
+<span class="tree-dir">│   ├── commands/</span>          <span class="tree-comment"># consulting/, quality/, workflow/</span>
+<span class="tree-dir">│   ├── mcps/</span>              <span class="tree-comment"># catalog.md, recipes/, opencode-mcp-helper.sh</span>
+<span class="tree-dir">│   └── references/</span>        <span class="tree-comment"># registry.yaml + ~150 repo pages in templates/ + ai-tools/</span>
+│
+<span class="tree-dir">├── global-config/</span>
+<span class="tree-dir">│   ├── claude-code/</span>       <span class="tree-comment"># CLAUDE.md, settings.json, mcp-servers.json</span>
+<span class="tree-dir">│   ├── openclaw/</span>          <span class="tree-comment"># SOUL.md, openclaw.json.template</span>
+<span class="tree-dir">│   ├── opencode/</span>          <span class="tree-comment"># mcp-servers.json</span>
+<span class="tree-dir">│   └── pal/</span>               <span class="tree-comment"># custom_models.json (Qwen, Gemini)</span>
+│
+<span class="tree-dir">├── docs/</span>
+<span class="tree-dir">│   ├── global-setup/</span>      <span class="tree-comment"># mcps.md, plugins.md, skills.md, hooks.md, hq-launchers.md</span>
+<span class="tree-dir">│   └── catalog/</span>           <span class="tree-comment"># INDEX.md (live inventory), QUICKREF.md</span>
+│
+<span class="tree-dir">├── scripts/</span>               <span class="tree-comment"># Manual ops: install-global.sh, audit-all.sh, sync-learnings.sh</span>
+│
+<span class="tree-dir">├── tools/</span>
+<span class="tree-dir">│   ├── scripts/</span>           <span class="tree-comment"># All launchd-invoked scripts (run-*.sh, notify-telegram.sh, etc.)</span>
+<span class="tree-dir">│   ├── prompts/</span>           <span class="tree-comment"># AI prompt templates for scheduled jobs</span>
+<span class="tree-dir">│   └── logs/</span>              <span class="tree-comment"># Daily/weekly log files (YYYY-MM-DD rotation)</span>
+│
+<span class="tree-dir">├── planning/</span>              <span class="tree-comment"># BACKLOG.md + archive of completed planning docs</span>
+<span class="tree-dir">├── execution/</span>             <span class="tree-comment"># Setup guides, TASKS.md, CLAUDE.md reference copy</span>
+<span class="tree-dir">├── learnings/per-project/</span> <span class="tree-comment"># Synced LEARNINGS.md files from active projects</span>
+<span class="tree-dir">└── zz_handoffs/</span>           <span class="tree-comment"># Session handoff docs (YYYY-MM-DD-topic.md)</span>
+</pre>
+</div>
+</section>
+
+<!-- AUTOMATION -->
+<section id="automation">
+<div class="container">
+  <div class="section-label">05 — Automation</div>
+  <h2>Scheduled Jobs</h2>
+  <p>Eight launchd jobs run autonomously. All are managed via Lingon Pro 10. Every script sources <code>tools/scripts/env.sh</code> to reconstruct the PATH that launchd strips. Jobs are silent on success — Telegram fires only when attention is needed.</p>
+
+  <div class="callout orange">
+    <strong>Notification pattern:</strong> Success = silent. Attention needed = Telegram notification. Hard failure = Telegram + GitHub issue (deduplicated by title via <code>create-issue.sh</code>).
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Job</th><th>Schedule (SGT)</th><th>What It Does</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>com.vibe-hq.heartbeat</td>
+        <td><span class="time">09:00 daily</span></td>
+        <td>Checks that all other launchd jobs ran since yesterday. Flags missed jobs or launchd startup failures.</td>
+      </tr>
+      <tr>
+        <td>com.vibe-hq.config-drift</td>
+        <td><span class="time">08:15 daily</span></td>
+        <td>Scans active projects: CLAUDE.md exists and is recent, <code>.claude/</code> present, trufflehog hook installed, at least one agent defined.</td>
+      </tr>
+      <tr>
+        <td>com.vibe-hq.learning-harvest</td>
+        <td><span class="time">02:15 daily</span></td>
+        <td>Claude reads all active projects, compares vs library, writes harvest log, notifies if drift found.</td>
+      </tr>
+      <tr>
+        <td>com.vibe-hq.planning-digest</td>
+        <td><span class="time">08:00 daily</span></td>
+        <td>Morning digest: open planning tasks, GitHub issue count, anything needing action today.</td>
+      </tr>
+      <tr>
+        <td>com.vibe-hq.refresh-references</td>
+        <td><span class="time">03:30 daily</span></td>
+        <td>Parses <code>registry.yaml</code>, finds stale pages (&gt;7 days), batches to Qwen, writes markdown detail pages, commits and pushes.</td>
+      </tr>
+      <tr>
+        <td>com.vibe-hq.doctor</td>
+        <td><span class="time">Mon 10:15</span></td>
+        <td>Full weekly health check: tools installed, global config deployed, MCPs responding, library well-formed, templates valid.</td>
+      </tr>
+      <tr>
+        <td>com.vibe-hq.toolkit-scout</td>
+        <td><span class="time">Sun 10:15</span></td>
+        <td>Claude scans for new tools, MCPs, skills, and plugins worth adding. Reports candidates with rationale.</td>
+      </tr>
+      <tr>
+        <td>com.vibe-hq.privacy-audit</td>
+        <td><span class="time">Sun 09:00</span></td>
+        <td>Cross-project audit: repo visibility settings, secrets in tracked files, .env exposure, GitHub Actions secret hygiene.</td>
+      </tr>
+      <tr>
+        <td>blogs.market-scan-us</td>
+        <td><span class="time">21:00 daily</span></td>
+        <td>US premarket scanner: searches gappers, SPX/QQQ futures bias, EU close recap, top catalysts. Writes opportunity table (stop at buy signal) to <code>zz_handoffs/</code> in blogs repo.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>Notification Infrastructure</h4>
+  <p>Two shared scripts handle all external communication:</p>
+
+  <pre><span class="tree-comment"># tools/scripts/notify-telegram.sh</span>
+<span class="tree-comment"># Usage: notify-telegram.sh &lt;keychain-account&gt; &lt;message&gt; [--silent]</span>
+<span class="tree-comment"># - Reads BOT_TOKEN and CHAT_ID from macOS Keychain</span>
+<span class="tree-comment"># - Auto-silences during quiet hours (22:00–08:00 SGT)</span>
+<span class="tree-comment"># - Appends timestamp to every message</span>
+
+<span class="tree-comment"># tools/scripts/create-issue.sh</span>
+<span class="tree-comment"># - Creates GitHub issue in FALK-BRAUER/vibe-hq</span>
+<span class="tree-comment"># - Checks for existing open issue with same title first</span>
+<span class="tree-comment"># - If duplicate found: adds a comment instead of creating new issue</span>
+<span class="tree-comment"># - Prevents issue spam from repeated failures</span></pre>
+
+  <h4>Reference Library Refresh Flow</h4>
+  <p>The most technically interesting scheduled job:</p>
+
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">📚</span>
+      <span class="wf-title">run-refresh-references.sh</span>
+      <span class="wf-badge">03:30 SGT · daily</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Parse registry.yaml</strong> — pure awk, no dependencies. Reads every <code>url + category + note</code> entry.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Classify repos</strong> — <code>init</code> (no detail page exists yet) or <code>update</code> (page is older than 7 days).</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Batch into groups of 10</strong> — feeds each batch to <code>opencode run -m alibaba/qwen3.5-plus</code> with the <code>tools/prompts/refresh-references.md</code> prompt.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Qwen writes the pages</strong> — standardised frontmatter (url, stars, last_checked, last_commit, category, status) plus sections: What's Inside, Stack, File Tree, AI-Readiness, Notable.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Commit and push</strong> — shell script handles git, Qwen only writes markdown. Telegram notification on completion.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- MAINTENANCE WORKFLOWS -->
+<section id="workflows">
+<div class="container">
+  <div class="section-label">06 — Maintenance &amp; Improvement</div>
+  <h2>How the System Improves Itself</h2>
+  <p>Vibe HQ is designed so that accumulated knowledge flows upward and infrastructure stays current without manual effort. Here are the core maintenance workflows.</p>
+
+  <h3><span class="num">A</span> Config Drift → Fix Loop</h3>
+  <p>When a project diverges from standards (old CLAUDE.md, missing agent, no trufflehog hook), the system catches it before it causes a real problem.</p>
+
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-node accent">Daily drift scan</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node orange">Drift found</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node purple">Telegram alert</div>
+    </div>
+    <div class="flow-label">08:15 SGT · run-config-drift.sh scans all active projects</div>
+    <div style="height:16px"></div>
+    <div class="flow-row">
+      <div class="flow-node purple">Telegram alert</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node green">Human opens project session</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node green">Fix applied</div>
+    </div>
+    <div class="flow-label">YOUR_USER opens the flagged project and runs /sync or fixes manually</div>
+    <div style="height:16px"></div>
+    <div class="flow-row">
+      <div class="flow-node green">Fix applied</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node accent">Update template?</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node orange">Improve library</div>
+    </div>
+    <div class="flow-label">If the same drift keeps appearing, update the template so future projects start correctly</div>
+  </div>
+
+  <h3><span class="num">B</span> Learning → Library Promotion</h3>
+  <p>When a project develops a useful pattern — a new skill, a better hook, an improved CLAUDE.md section — it should flow back into the library.</p>
+
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">🔄</span>
+      <span class="wf-title">Promotion Workflow</span>
+      <span class="wf-badge">Human-gated</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Harvest detects</strong> — daily job finds a skill or agent in a project that isn't in <code>library/</code>. Writes it to the harvest log with file path and description.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Human reviews</strong> — opens <code>tools/logs/harvest-YYYY-MM-DD.md</code>, decides: is this specific to this project or generally useful?</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Promote to library</strong> — copy the component to the right <code>library/</code> subdirectory, update <code>CATALOG.md</code>.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Update templates if needed</strong> — if the component should be default in new projects, add it to the relevant template's <code>manifest.json</code>.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Commit and push</strong> — vibe-hq is a git repo. All library improvements are versioned.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3><span class="num">C</span> Toolkit Scout → Adoption</h3>
+  <p>Every Sunday, Claude scans for new tools worth adopting — new MCP servers, new Claude Code plugins, new CLI tools in the ecosystem.</p>
+
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">🔭</span>
+      <span class="wf-title">Toolkit Scout Pipeline</span>
+      <span class="wf-badge">Sun 10:15 SGT</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Claude scans</strong> — uses <code>tools/prompts/toolkit-scout.md</code>, searches GitHub trending, Anthropic MCP registry, community forums.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Evaluates candidates</strong> — filters by: does it add capability not already covered, is it maintained, does it fit the stack.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Reports to Telegram</strong> — sends a brief summary with links and rationale for each candidate.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Human decides</strong> — if a tool looks good, install it, add to <code>global-config/claude-code/mcp-servers.json</code>, document in <code>docs/global-setup/mcps.md</code>, add recipe to <code>library/mcps/recipes/</code>.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3><span class="num">D</span> Global Config Deployment</h3>
+  <p>When <code>global-config/</code> is updated in vibe-hq, it needs to be deployed to the live system. This is intentionally a manual step.</p>
+
+  <pre><span class="tree-comment"># After editing global-config/claude-code/settings.json:</span>
+scripts/install-global.sh
+
+<span class="tree-comment"># What it does:</span>
+<span class="tree-comment"># 1. cp global-config/claude-code/CLAUDE.md → ~/.claude/CLAUDE.md</span>
+<span class="tree-comment"># 2. cp global-config/claude-code/settings.json → ~/.claude/settings.json</span>
+<span class="tree-comment"># 3. Merges mcp-servers.json into ~/.claude.json (non-destructive)</span>
+<span class="tree-comment"># 4. Prints diff summary of what changed</span>
+
+<span class="tree-comment"># Then: restart Claude Code sessions to pick up new config</span></pre>
+
+  <h3><span class="num">E</span> Adding a New Project</h3>
+
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">🆕</span>
+      <span class="wf-title">/new-project Command</span>
+      <span class="wf-badge">~2 minutes end-to-end</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body">Choose template: <code>nextjs-app</code>, <code>fastapi-service</code>, or <code>consulting-report</code></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body">Claude reads <code>templates/&lt;name&gt;/manifest.json</code>, creates <code>~/projects/&lt;name&gt;/</code> with full directory structure</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body">Copies agents, skills, hooks, commands from <code>library/</code> into the project's <code>.claude/</code></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body">Renders <code>CLAUDE.md.template</code> with project name and date</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body">Installs MCPs listed in manifest via <code>library/mcps/recipes/</code></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body">Creates <code>registry/active/&lt;name&gt;.md</code> with all fields pre-filled</div></div>
+        <div class="step"><div class="step-num">7</div><div class="step-body">Initialises git, creates GitHub repo if requested</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3><span class="num">F</span> Archiving a Project</h3>
+
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">📦</span>
+      <span class="wf-title">/archive Command</span>
+      <span class="wf-badge">Human-triggered</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body">Moves <code>registry/active/&lt;name&gt;.md</code> → <code>registry/archived/&lt;name&gt;.md</code>, stamps with archive date</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body">Removes from <code>run-config-drift.sh</code> scan list so it stops generating false alerts</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body">Final sync of <code>LEARNINGS.md</code> before archiving</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body">Commits the archive action to vibe-hq git</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- OPENCLAW -->
+<section id="openclaw">
+<div class="container">
+  <div class="section-label">07 — OpenClaw</div>
+  <h2>The Autonomous Agent</h2>
+  <p>OpenClaw is a separate, autonomous agent running 24/7 on the <code>claw</code> macOS account. It is configured and governed from vibe-hq but operates independently. Think of it as a persistent executive assistant that lives alongside the Mac.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📧</div>
+      <h4>Email Digests</h4>
+      <p>Reads Thunderbird via thunderbird-mcp. Produces morning and evening email summaries via Telegram.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <h4>Web Research</h4>
+      <p>Uses jina-reader and playwright for headless browsing, news monitoring, and on-demand research.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💬</div>
+      <h4>Telegram Interface</h4>
+      <p>YOUR_USER can send tasks, questions, and commands via Telegram. OpenClaw responds and acts.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💻</div>
+      <h4>Coding Delegation</h4>
+      <p>For code tasks, OpenClaw SSHs to <code>YOUR_USER@localhost</code> and spawns Claude Code. Never writes code itself.</p>
+    </div>
+  </div>
+
+  <h4>Architecture</h4>
+  <pre><span class="tree-comment"># OpenClaw v2026 stack</span>
+<span class="tree-key">Runtime:</span>    Node.js 22 + OpenClaw core
+<span class="tree-key">Gateway:</span>    LiteLLM (model routing)
+<span class="tree-key">Models:</span>     Anthropic Claude (primary)
+             Alibaba Qwen (reference refresh, bulk ops)
+             Gemini (fallback / research)
+
+<span class="tree-key">MCPs:</span>       thunderbird-mcp   → email read/search
+             jina-reader        → web fetch, search
+             playwright         → headless browser
+
+<span class="tree-key">Security:</span>
+  binding:      ws://127.0.0.1:29741  (loopback only)
+  auth:         token-based
+  exec:         security = "deny"
+  fs:           workspaceOnly = true
+  firewall:     macOS blocks inbound
+
+<span class="tree-key">Config location:</span>  /Users/YOUR_AGENT_USER/.openclaw/openclaw.json
+<span class="tree-key">Identity:</span>         global-config/openclaw/SOUL.md
+<span class="tree-key">Deploy:</span>           scripts/deploy-openclaw.sh</pre>
+
+  <div class="callout purple">
+    <strong>SOUL.md governs everything.</strong> The OpenClaw identity file defines hard rules (never auto-approve purchases, never delete email, always CC YOUR_USER on client emails), communication style, and the boundary between what OpenClaw does autonomously vs what it escalates. Vibe HQ owns this file — changes are deployed via <code>scripts/deploy-openclaw.sh</code>.
+  </div>
+</div>
+</section>
+
+<!-- DATA FLOW -->
+<section id="dataflow">
+<div class="container">
+  <div class="section-label">08 — System Data Flow</div>
+  <h2>How Everything Connects</h2>
+  <p>The diagram below shows the key data flows between all systems. Read it as a picture of where information originates and where it ends up.</p>
+
+  <div class="flow" style="padding: 28px 16px;">
+    <!-- Row 1: Core vibe-hq subsystems -->
+    <div style="text-align:center; font-size:11px; font-family:var(--font-mono); color:var(--muted); margin-bottom:8px; letter-spacing:0.08em;">VIBE-HQ META-PROJECT</div>
+    <div style="background:rgba(88,166,255,0.05); border:1px solid rgba(88,166,255,0.2); border-radius:10px; padding:16px; margin-bottom:20px;">
+      <div class="flow-row" style="flex-wrap:wrap; gap:8px; justify-content:center;">
+        <div class="flow-node accent">registry/</div>
+        <div class="flow-node accent">templates/</div>
+        <div class="flow-node accent">library/</div>
+        <div class="flow-node accent">global-config/</div>
+        <div class="flow-node accent">tools/scripts/</div>
+      </div>
+    </div>
+
+    <!-- Row 2: Arrows down to Projects -->
+    <div class="flow-row">
+      <div style="flex:1; text-align:center; color:var(--muted); font-size:12px; font-family:var(--font-mono);">/new-project scaffolds ↓</div>
+      <div style="flex:1; text-align:center; color:var(--muted); font-size:12px; font-family:var(--font-mono);">install-global.sh deploys ↓</div>
+      <div style="flex:1; text-align:center; color:var(--muted); font-size:12px; font-family:var(--font-mono);">harvest reads ↑↓</div>
+    </div>
+    <div style="height:12px"></div>
+
+    <!-- Row 3: Projects + Global -->
+    <div class="flow-row" style="gap:16px; align-items:flex-start; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px; background:rgba(126,231,135,0.05); border:1px solid rgba(126,231,135,0.2); border-radius:10px; padding:14px;">
+        <div style="font-size:11px; font-family:var(--font-mono); color:var(--accent2); margin-bottom:10px; letter-spacing:0.08em;">ACTIVE PROJECTS</div>
+        <div class="flow-node green" style="margin:4px 0; min-width:unset; width:100%">fintrack</div>
+        <div class="flow-node green" style="margin:4px 0; min-width:unset; width:100%">LinkedInOrganiser</div>
+        <div class="flow-node green" style="margin:4px 0; min-width:unset; width:100%">blogs · camel-cpq · ...</div>
+      </div>
+      <div style="flex:1; min-width:180px; background:rgba(255,166,87,0.05); border:1px solid rgba(255,166,87,0.2); border-radius:10px; padding:14px;">
+        <div style="font-size:11px; font-family:var(--font-mono); color:var(--accent3); margin-bottom:10px; letter-spacing:0.08em;">GLOBAL INSTALL (~/.claude/)</div>
+        <div class="flow-node orange" style="margin:4px 0; min-width:unset; width:100%">settings.json</div>
+        <div class="flow-node orange" style="margin:4px 0; min-width:unset; width:100%">mcp-servers (8)</div>
+        <div class="flow-node orange" style="margin:4px 0; min-width:unset; width:100%">CLAUDE.md</div>
+      </div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <!-- Row 4: External services -->
+    <div class="flow-row" style="gap:8px;">
+      <div style="text-align:center; width:100%; font-size:11px; font-family:var(--font-mono); color:var(--muted); margin-bottom:8px;">SCHEDULED JOBS → EXTERNAL SERVICES</div>
+    </div>
+    <div class="flow-row" style="gap:8px; flex-wrap:wrap;">
+      <div class="flow-node purple">Telegram Bot</div>
+      <div class="flow-arrow">←</div>
+      <div class="flow-node accent">tools/scripts/</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node purple">GitHub Issues</div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="flow-row" style="gap:8px; flex-wrap:wrap;">
+      <div class="flow-node red">Anthropic Claude</div>
+      <div class="flow-node red">Alibaba Qwen</div>
+      <div class="flow-node red">Gemini</div>
+    </div>
+    <div class="flow-label">harvest + toolkit-scout use Claude · reference refresh uses Qwen · OpenClaw routes via LiteLLM</div>
+
+    <div style="height:20px"></div>
+
+    <!-- OpenClaw -->
+    <div class="flow-row" style="gap:8px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:220px; background:rgba(210,168,255,0.05); border:1px solid rgba(210,168,255,0.2); border-radius:10px; padding:14px;">
+        <div style="font-size:11px; font-family:var(--font-mono); color:var(--accent5); margin-bottom:10px; letter-spacing:0.08em;">OPENCLAW (claw account)</div>
+        <div class="flow-row" style="flex-wrap:wrap; gap:6px; justify-content:flex-start;">
+          <div class="flow-node purple" style="min-width:unset; font-size:12px;">thunderbird-mcp</div>
+          <div class="flow-node purple" style="min-width:unset; font-size:12px;">jina-reader</div>
+          <div class="flow-node purple" style="min-width:unset; font-size:12px;">playwright</div>
+        </div>
+        <div style="text-align:center; color:var(--muted); font-size:12px; margin-top:10px; font-family:var(--font-mono);">SSH → YOUR_USER@localhost → Claude Code ↗</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- KEY FILES -->
+<section id="keyfiles">
+<div class="container">
+  <div class="section-label">09 — Key Files Reference</div>
+  <h2>Important Files at a Glance</h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>CLAUDE.md</td><td>Project context for all Claude Code sessions in vibe-hq</td></tr>
+      <tr><td>registry/active/&lt;project&gt;.md</td><td>Source of truth for each project's stack, status, deployed config, and ideas</td></tr>
+      <tr><td>templates/&lt;name&gt;/manifest.json</td><td>Declares what agents, skills, hooks, MCPs to install when scaffolding</td></tr>
+      <tr><td>library/references/registry.yaml</td><td>Human-edited list of ~150 curated repos; Qwen generates detail pages from this</td></tr>
+      <tr><td>library/skills/CATALOG.md</td><td>Master index of all skills in the library with category and usage</td></tr>
+      <tr><td>global-config/claude-code/settings.json</td><td>Global hooks, permissions, enabled plugins for all Claude Code sessions</td></tr>
+      <tr><td>global-config/claude-code/mcp-servers.json</td><td>Canonical MCP server definitions for the YOUR_USER account (8 global MCPs)</td></tr>
+      <tr><td>global-config/openclaw/SOUL.md</td><td>Identity, hard rules, and behavioral constraints for OpenClaw</td></tr>
+      <tr><td>docs/scheduled-jobs.md</td><td>Complete table of all launchd jobs, schedules, and scripts</td></tr>
+      <tr><td>docs/catalog/INDEX.md</td><td>Live inventory: 16 MCPs, 7 plugins, 9 agents, 38 skills</td></tr>
+      <tr><td>tools/scripts/env.sh</td><td>PATH reconstruction sourced by every launchd-triggered script</td></tr>
+      <tr><td>tools/scripts/notify-telegram.sh</td><td>Telegram notification with Keychain credentials and quiet-hours logic</td></tr>
+      <tr><td>tools/scripts/create-issue.sh</td><td>GitHub issue creation with deduplication (comment if already open)</td></tr>
+      <tr><td>tools/prompts/learning-harvest.md</td><td>Instructions given to Claude for the daily harvest job</td></tr>
+      <tr><td>tools/prompts/refresh-references.md</td><td>Instructions given to Qwen for reference library page generation</td></tr>
+      <tr><td>scripts/install-global.sh</td><td>Deploys global-config/ to ~/.claude/ — run after any config change</td></tr>
+      <tr><td>scripts/audit-all.sh</td><td>Manual comprehensive config drift audit across all active projects</td></tr>
+      <tr><td>zz_handoffs/YYYY-MM-DD-*.md</td><td>Session handoff documents — always read the latest before starting work</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <h4>Tags: what's globally installed</h4>
+  <div style="margin-top: 10px;">
+    <span class="tag blue">memory MCP</span>
+    <span class="tag blue">sequential-thinking MCP</span>
+    <span class="tag blue">context7 MCP</span>
+    <span class="tag blue">chrome-devtools MCP</span>
+    <span class="tag blue">filesystem MCP</span>
+    <span class="tag blue">github MCP</span>
+    <span class="tag blue">jina-reader MCP</span>
+    <span class="tag blue">pal MCP</span>
+    <span class="tag orange">GSD plugin</span>
+    <span class="tag orange">Ralph Loop plugin</span>
+    <span class="tag orange">claude-reflect plugin</span>
+    <span class="tag orange">pr-review-toolkit plugin</span>
+    <span class="tag green">Prettier hook</span>
+    <span class="tag green">Trufflehog pre-commit</span>
+    <span class="tag green">semgrep post-write</span>
+    <span class="tag green">GSD context monitor</span>
+  </div>
+</div>
+</section>
+
+<!-- MARKET INTELLIGENCE -->
+<section id="marketintel">
+<div class="container">
+  <div class="section-label">10 — Market Intelligence</div>
+  <h2>Daily Market Scanner</h2>
+  <p>Three scheduled sessions scan global markets for short-term trending opportunities. Each session covers its regional window, surfaces setups with minimal downside risk, and writes a structured report to <code>zz_handoffs/</code>. Reports stop at buy signal — the setup is identified and the confirmation condition is stated, but no explicit buy/sell recommendations are made.</p>
+
+  <div class="callout orange">
+    <strong>Signal discipline:</strong> Every opportunity entry includes a <em>Buy setup if:</em> field — the specific condition that would need to hold for entry (e.g. "holds above premarket high at open with volume confirmation"). The scanner identifies; you decide.
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Session</th><th>Time (SGT / UTC)</th><th>Markets Covered</th><th>Output</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Asia + Overnight US</strong><br><span style="font-size:12px;color:var(--muted)">via Daily Blog Research job</span></td>
+        <td><span class="time">09:00 SGT / 01:00 UTC</span></td>
+        <td>Tokyo (TSE), Hong Kong (HKEX), Singapore (SGX), China A-shares — plus overnight US close recap</td>
+        <td><code>YYYY-MM-DD-daily-research.md</code><br><span style="font-size:12px;color:var(--muted)">Asia scan table embedded in blog research handoff</span></td>
+      </tr>
+      <tr>
+        <td><strong>EU Open</strong><br><span style="font-size:12px;color:var(--muted)">via Daily Blog Writing job</span></td>
+        <td><span class="time">14:00 SGT / 06:00 UTC / 08:00 CET</span></td>
+        <td>London (LSE), Frankfurt (XETRA), Paris (Euronext), Amsterdam — plus Asia close recap</td>
+        <td><code>YYYY-MM-DD-daily-writing.md</code><br><span style="font-size:12px;color:var(--muted)">EU scan table embedded in blog writing handoff</span></td>
+      </tr>
+      <tr>
+        <td><strong>US Premarket</strong><br><span style="font-size:12px;color:var(--muted)">Market Scan — US Premarket job</span></td>
+        <td><span class="time">21:00 SGT / 13:00 UTC / 09:00 ET</span></td>
+        <td>NYSE, NASDAQ — 30 min before open. Includes SPX/QQQ futures bias, EU close recap</td>
+        <td><code>YYYY-MM-DD-market-scan-us.md</code></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="num">1</span> What the scanner looks for</h3>
+  <div class="card-grid" style="margin-top:12px;">
+    <div class="card">
+      <div class="card-title">Momentum setups</div>
+      <p>Stocks gapping on volume with a clear catalyst. Sector rotation signals. Index inclusion plays where the outcome is already confirmed.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">News catalysts</div>
+      <p>Earnings surprises (beats or misses trading premarket), M&amp;A announcements, analyst upgrades/downgrades, regulatory approvals, macro data surprises.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Low-risk setups</div>
+      <p>Situations where the outcome is largely known and the trade is riding confirmation. Arbitrage spreads. Confirmed catalysts where price hasn't fully moved.</p>
+    </div>
+  </div>
+
+  <h3><span class="num">2</span> Opportunity report format</h3>
+  <p>Each session outputs a structured table in its handoff file:</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Ticker</th><th>Catalyst</th><th>Signal</th><th>Risk</th><th>Buy setup if:</th></tr></thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--accent2);font-family:var(--font-mono)">NVDA</td>
+        <td>Earnings beat + raised guidance</td>
+        <td>+4.2% premarket on 3x avg volume</td>
+        <td>Tariff headlines could reverse; high valuation</td>
+        <td>Holds above premarket high ($920) at open with sustained volume</td>
+      </tr>
+      <tr>
+        <td style="color:var(--accent2);font-family:var(--font-mono)">9988.HK</td>
+        <td>Qwen model release, Alibaba Cloud revenue beat</td>
+        <td>+3.8% at HK open, sector following</td>
+        <td>China regulatory risk; macro sentiment</td>
+        <td>Breaks above HK$92 with 10-day avg volume exceeded</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="num">3</span> Job schedule overview</h3>
+  <div class="workflow">
+    <div class="workflow-header">
+      <span class="wf-icon">📈</span>
+      <span class="wf-title">24-hour market coverage</span>
+      <span class="wf-badge">3 sessions · all market windows</span>
+    </div>
+    <div class="workflow-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>01:00 UTC — Asia + US overnight</strong> Claude searches Asia open movers and overnight US close. Writes scan table into the daily research handoff alongside blog topic research.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>06:00 UTC — EU open</strong> Claude searches EU market open movers and Asia close recap. Writes scan table into the daily writing handoff alongside blog writing work.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>13:00 UTC — US premarket</strong> Dedicated scan 30 minutes before NYSE/NASDAQ open. Searches premarket gappers, futures direction, EU close, and top catalysts. Writes standalone <code>market-scan-us.md</code>.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="background:rgba(126,231,135,0.05);border-color:rgba(126,231,135,0.25);">
+    <strong>Coverage gap:</strong> No dedicated EU close / US afternoon session. The 13:00 UTC US premarket scan covers EU close as context. A 4th daily job would fill this but the plan limit is 3 active daily jobs.
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>Generated 2026-04-03 · Vibe Coding HQ · <code>~/hq</code> · YOUR_HARDWARE</p>
+</footer>
+
+</body>
+</html>

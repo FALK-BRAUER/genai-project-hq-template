@@ -1,0 +1,197 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(node:*)",
+      "Bash(brew:*)",
+      "Bash(python3:*)",
+      "Bash(docker:*)",
+      "Bash(ssh YOUR_HOST:*)",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(sudo rm *)",
+      "Bash(sudo:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Write(./production.config.*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"from datetime import datetime; now=datetime.now(); print(f'Today is {now.strftime(\\'%A, %B %d, %Y\\')}. Timezone: Asia/Singapore.')\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write(*.ts)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx prettier --write $file"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.tsx)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx prettier --write $file"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.py)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -m black $file"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.css)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx prettier --write $file"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.ts)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx semgrep --config auto --quiet $file 2>&1 || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.tsx)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx semgrep --config auto --quiet $file 2>&1 || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(src/**/*.ts)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"$file\"; if echo \"$FILE\" | grep -qE \"(route|api|model|schema|middleware|controller)\"; then echo \"Hint: You modified a structural file ($FILE). Check if ARCHITECTURE.md needs updating.\"; fi'"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.test.ts)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Hint: Run the test you just wrote to verify it passes.'"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/gsd-context-monitor.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx trufflehog filesystem --no-update . --fail 2>&1"
+          },
+          {
+            "type": "command",
+            "command": "bash -c 'STRUCTURAL=$(git diff --cached --name-only | grep -cE \"(route|api|model|schema|migration|controller)\" || true); ARCH=$(git diff --cached --name-only | grep -c ARCHITECTURE.md || true); if [ \"$STRUCTURAL\" -gt 0 ] && [ \"$ARCH\" -eq 0 ]; then echo \"Structural files changed but ARCHITECTURE.md was not updated. Update diagrams before committing.\"; exit 1; fi'"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/gsd-prompt-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node \"$HOME/.claude/hooks/gsd-statusline.js\""
+  },
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true,
+    "playground@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "claude-reflect@claude-reflect-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "awesome-claude-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "ComposioHQ/awesome-claude-plugins"
+      }
+    },
+    "claude-reflect-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "bayramannakov/claude-reflect"
+      }
+    }
+  },
+  "outputStyle": "explanatory",
+  "spinnerVerbs": {
+    "mode": "append",
+    "verbs": [
+      "coding",
+      "thinking",
+      "building"
+    ]
+  },
+  "fastMode": true,
+  "plansDirectory": ".claude/plans/",
+  "skipDangerousModePermissionPrompt": true
+}

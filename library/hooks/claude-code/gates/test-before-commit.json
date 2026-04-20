@@ -1,0 +1,14 @@
+{
+  "event": "PreToolUse",
+  "description": "Block git commit unless tests pass",
+  "hooks": [
+    {
+      "matcher": "Bash(git commit*)",
+      "hooks": [{
+        "type": "command",
+        "command": "npm test --if-present 2>&1 | tail -5",
+        "blocking": true
+      }]
+    }
+  ]
+}

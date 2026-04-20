@@ -1,0 +1,36 @@
+# CLAUDE.md — {{PROJECT_NAME}}
+
+## Overview
+[What this service does, who it's for, why it exists]
+
+## Tech Stack
+- Python 3.12+, FastAPI, Pydantic v2
+- PostgreSQL + SQLAlchemy async
+- pytest + httpx for testing
+- Docker for deployment
+
+## Build & Test
+- Install: `pip install -r requirements.txt`
+- Dev: `uvicorn app.main:app --reload`
+- Test: `pytest`
+- Lint: `ruff check .`
+- Type check: `mypy .`
+
+## Architecture
+See ARCHITECTURE.md for Mermaid diagrams.
+
+## API Docs
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## Current Focus
+[Updated after each work session]
+
+## Known Issues
+[Active bugs, tech debt]
+
+## Domain Rules
+[Business logic Claude needs to understand]
+
+---
+*Scaffolded from fastapi-service template on {{CREATED_DATE}}*

@@ -1,0 +1,14 @@
+{
+  "event": "PostToolUse",
+  "description": "Remind to run tests after writing test files",
+  "hooks": [
+    {
+      "matcher": "Write(*.test.ts)",
+      "hooks": [{"type": "command", "command": "echo 'Reminder: Run the test you just wrote'", "blocking": false}]
+    },
+    {
+      "matcher": "Write(*.test.tsx)",
+      "hooks": [{"type": "command", "command": "echo 'Reminder: Run the test you just wrote'", "blocking": false}]
+    }
+  ]
+}

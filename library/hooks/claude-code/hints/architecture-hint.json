@@ -1,0 +1,14 @@
+{
+  "event": "PostToolUse",
+  "description": "Remind about ARCHITECTURE.md when creating new modules or routes",
+  "hooks": [
+    {
+      "matcher": "Write(*/app/api/*/route.ts)",
+      "hooks": [{"type": "command", "command": "echo 'Hint: Update ARCHITECTURE.md API route map if this is a new endpoint'", "blocking": false}]
+    },
+    {
+      "matcher": "Write(*/prisma/schema.prisma)",
+      "hooks": [{"type": "command", "command": "echo 'Hint: Update ARCHITECTURE.md data model diagram if schema changed'", "blocking": false}]
+    }
+  ]
+}

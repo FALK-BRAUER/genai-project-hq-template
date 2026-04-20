@@ -1,0 +1,26 @@
+# AGENTS.md — Project-Specific (OpenCode)
+
+## Project Identity
+This is a [PROJECT_NAME] project. All code follows the global YOUR_NAME standards from `~/.config/opencode/AGENTS.md`.
+
+## Project-Specific Rules
+- Frontend lives in `src/app/` (Next.js App Router)
+- API routes in `src/app/api/`
+- Database models in `src/lib/db/`
+- Always run tests after changes: `npm test`
+- Commit before major refactors: `git commit -m "refactor: [change]"`
+
+## Stack Confirmation
+- **Frontend:** Next.js (App Router), React, Tailwind CSS, shadcn/ui
+- **Backend:** Next.js API Routes
+- **Database:** PostgreSQL + Prisma ORM
+- **Testing:** Vitest + React Testing Library
+- **Validation:** Zod for runtime validation
+
+## CI/CD
+- Tests run on every push to main
+- Linting enforced pre-commit
+- Vercel auto-deploys main branch
+
+## Contact
+Questions about project setup? Check CONTRIBUTING.md or ask YOUR_NAME directly.

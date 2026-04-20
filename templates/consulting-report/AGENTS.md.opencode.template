@@ -1,0 +1,28 @@
+# AGENTS.md — Project-Specific (OpenCode)
+
+## Project Identity
+This is a [PROJECT_NAME] consulting report. Follow client guidelines and YOUR_NAME standards from `~/.config/opencode/AGENTS.md`.
+
+## Project-Specific Rules
+- Main document in `report.md` (or specified in client brief)
+- Supporting materials in `appendices/`
+- Data/charts in `data/` with source references
+- Keep sections <= 2,000 words (client readability)
+- Use clear headings: # Executive Summary, ## Key Findings, ### Recommendation
+- All numbers cited must have sources (footnotes or appendix references)
+- Final draft review required before sending to client
+
+## Deliverables
+- Executive summary (1 page)
+- Main report (10–20 pages typically)
+- Appendices (charts, data, methodology)
+- Optional: presentation slide deck
+
+## Client Handoff
+- PDF export with embedded fonts
+- Clean formatting, no code or technical jargon unless explicitly requested
+- Include table of contents and page numbers
+- Review with client stakeholder before final send
+
+## Contact
+Report questions? Check the engagement brief or ask YOUR_NAME directly.

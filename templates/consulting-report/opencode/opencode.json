@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "alibaba/qwen3.5-plus",
+  "default_agent": "build",
+  "permission": {
+    "edit": "auto",
+    "bash": "auto"
+  },
+  "compaction": {
+    "enabled": true,
+    "threshold": 0.7
+  },
+  "mcp": {
+    "notion": {
+      "type": "local",
+      "command": ["npx", "-y", "@notionhq/mcp"],
+      "environment": {
+        "NOTION_TOKEN": "env:NOTION_TOKEN"
+      }
+    }
+  }
+}

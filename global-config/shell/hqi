@@ -1,0 +1,131 @@
+#!/bin/bash
+# hqi — Open iTerm2 with split panes for all projects running Claude Code
+# Usage: hqi [panes-per-tab]
+#   hqi       — all projects in one tab (widescreen)
+#   hqi 3     — max 3 panes per tab, overflow to new tabs
+# Dynamically discovers projects from ~/projects/ + ~/vibe-hq
+# Layout: vertical splits (side by side, wide panes)
+# Hybrid: System Events for splits, iTerm API for commands (avoids keystroke garbling)
+
+PROJECTS_DIR="$HOME/projects"
+SKIP="AWS-Development-Environment"
+PER_TAB="${1:-0}"  # 0 = all in one tab
+
+# Gather project directories and names
+dirs=()
+names=()
+for dir in "$PROJECTS_DIR"/*/; do
+  [ -d "$dir" ] || continue
+  [[ "$dir" == *"$SKIP"* ]] && continue
+  dirs+=("${dir%/}")
+  names+=("$(basename "$dir")")
+done
+if [ -d "$HOME/vibe-hq" ]; then
+  dirs+=("$HOME/vibe-hq")
+  names+=("vibe-hq")
+fi
+
+if [ ${#dirs[@]} -eq 0 ]; then
+  echo "No projects found"
+  exit 1
+fi
+
+total=${#dirs[@]}
+
+# Interleave: total, per_tab, dir1, name1, dir2, name2, ...
+args=("$total" "$PER_TAB")
+for i in "${!dirs[@]}"; do
+  args+=("${dirs[$i]}" "${names[$i]}")
+done
+
+osascript - "${args[@]}" <<'APPLESCRIPT'
+on run argv
+  set total to (item 1 of argv) as integer
+  set perTab to (item 2 of argv) as integer
+  if perTab ≤ 0 then set perTab to total
+
+  -- Dark color themes — each project gets a distinct dark hue
+  -- Format: {bg_r, bg_g, bg_b, fg_r, fg_g, fg_b, cursor_r, cursor_g, cursor_b}
+  set themes to {¬
+    {15, 20, 40, 190, 200, 220, 100, 140, 255}, ¬
+    {30, 12, 25, 220, 190, 210, 220, 100, 180}, ¬
+    {10, 28, 25, 180, 220, 210, 80, 220, 180}, ¬
+    {30, 20, 10, 220, 200, 170, 230, 160, 80}, ¬
+    {20, 12, 32, 200, 185, 225, 160, 110, 255}, ¬
+    {10, 25, 30, 180, 210, 225, 80, 190, 240}, ¬
+    {28, 22, 10, 215, 200, 165, 210, 170, 70}, ¬
+    {25, 10, 20, 210, 180, 200, 200, 90, 160}, ¬
+    {12, 28, 18, 185, 220, 195, 90, 210, 140}, ¬
+    {25, 18, 28, 205, 190, 215, 170, 120, 230} ¬
+  }
+
+  -- Helper: get dir from argv (1-based project index)
+  -- argv layout: total, perTab, dir1, name1, dir2, name2, ...
+  -- project i (1-based): dir = item (i-1)*2+3, name = item (i-1)*2+4
+
+  tell application "iTerm"
+    activate
+    create window with default profile
+    delay 1
+    set theWindow to current window
+  end tell
+
+  repeat with i from 1 to total
+    set dirIdx to (i - 1) * 2 + 3
+    set nameIdx to dirIdx + 1
+    set projDir to item dirIdx of argv
+    set projName to item nameIdx of argv
+    set themeIdx to ((i - 1) mod (count of themes)) + 1
+    set t to item themeIdx of themes
+
+    -- Position within current tab (1-based)
+    set posInTab to ((i - 1) mod perTab) + 1
+
+    if posInTab = 1 and i > 1 then
+      -- First project on a new tab: create the tab
+      tell application "iTerm"
+        tell theWindow
+          set newTab to (create tab with default profile)
+        end tell
+        delay 0.5
+        tell current session of current tab of theWindow
+          set name to projName
+          set background color to {(item 1 of t) * 257, (item 2 of t) * 257, (item 3 of t) * 257}
+          set foreground color to {(item 4 of t) * 257, (item 5 of t) * 257, (item 6 of t) * 257}
+          set cursor color to {(item 7 of t) * 257, (item 8 of t) * 257, (item 9 of t) * 257}
+          set bold color to {(item 4 of t) * 257, (item 5 of t) * 257, (item 6 of t) * 257}
+          write text "cd " & projDir & " && claude --dangerously-skip-permissions --dangerously-load-development-channels server:claude-peers --remote-control"
+        end tell
+      end tell
+    else if i = 1 then
+      -- Very first project: use the initial session
+      tell application "iTerm"
+        tell current session of current tab of theWindow
+          set name to projName
+          set background color to {(item 1 of t) * 257, (item 2 of t) * 257, (item 3 of t) * 257}
+          set foreground color to {(item 4 of t) * 257, (item 5 of t) * 257, (item 6 of t) * 257}
+          set cursor color to {(item 7 of t) * 257, (item 8 of t) * 257, (item 9 of t) * 257}
+          set bold color to {(item 4 of t) * 257, (item 5 of t) * 257, (item 6 of t) * 257}
+          write text "cd " & projDir & " && claude --dangerously-skip-permissions --dangerously-load-development-channels server:claude-peers --remote-control"
+        end tell
+      end tell
+    else
+      -- Split within current tab
+      tell application "System Events" to keystroke "d" using command down
+      delay 0.8
+      tell application "iTerm"
+        tell current session of current tab of theWindow
+          set name to projName
+          set background color to {(item 1 of t) * 257, (item 2 of t) * 257, (item 3 of t) * 257}
+          set foreground color to {(item 4 of t) * 257, (item 5 of t) * 257, (item 6 of t) * 257}
+          set cursor color to {(item 7 of t) * 257, (item 8 of t) * 257, (item 9 of t) * 257}
+          set bold color to {(item 4 of t) * 257, (item 5 of t) * 257, (item 6 of t) * 257}
+          write text "cd " & projDir & " && claude --dangerously-skip-permissions --dangerously-load-development-channels server:claude-peers --remote-control"
+        end tell
+      end tell
+    end if
+
+  end repeat
+
+end run
+APPLESCRIPT
