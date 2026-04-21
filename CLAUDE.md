@@ -27,6 +27,7 @@ GSD is a planning and execution framework installed globally. Run `/gsd:new-proj
 
 ## Rules
 - Every config change goes through this repo
+- **Keep Codex and OpenCode aligned with Claude Code** — when you add/update a skill in `global-config/claude-code/skills/`, mirror it to `global-config/codex/skills/`. When you add an MCP to Claude Code globally, add it to `global-config/opencode/mcp-servers.json` too. GSD is Claude Code-only (slash commands) — no Codex equivalent needed.
 - Templates are the source of truth — project configs derive from them
 - Learnings flow back from projects into templates
 - **Always document progress** — update execution docs, planning docs, and checklists as you complete steps

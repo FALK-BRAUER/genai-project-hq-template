@@ -21,8 +21,8 @@
       "env": {}
     },
     "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "$HOME/projects", "$HOME/projects/hq"],
+      "command": "bash",
+      "args": ["-c", "exec npx -y @modelcontextprotocol/server-filesystem \"$HOME/projects\" \"$HOME/projects/hq\""],
       "env": {}
     },
     "github": {
@@ -49,14 +49,18 @@
       "args": ["markitdown-mcp"],
       "env": {}
     },
+    "claude-peers": {
+      "command": "npx",
+      "args": ["-y", "claude-peers-mcp"],
+      "env": {}
+    },
     "pal": {
       "command": "bash",
-      "args": ["-c", "for p in $(which uvx 2>/dev/null) $HOME/.local/bin/uvx /opt/homebrew/bin/uvx /usr/local/bin/uvx uvx; do [ -x \"$p\" ] && exec \"$p\" --from git+https://github.com/BeehiveInnovations/pal-mcp-server.git pal-mcp-server; done; echo 'uvx not found' >&2; exit 1"],
+      "args": ["-c", "export CUSTOM_MODELS_CONFIG_PATH=\"$HOME/projects/hq/global-config/pal/custom_models.json\"; for p in $(which uvx 2>/dev/null) $HOME/.local/bin/uvx /opt/homebrew/bin/uvx /usr/local/bin/uvx uvx; do [ -x \"$p\" ] && exec \"$p\" --from git+https://github.com/BeehiveInnovations/pal-mcp-server.git pal-mcp-server; done; echo 'uvx not found' >&2; exit 1"],
       "env": {
-        "CUSTOM_API_KEY": "${ALIBABA_CODING_PLAN_KEY}",
-        "CUSTOM_API_URL": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
-        "CUSTOM_MODEL_NAME": "qwen3.5-plus",
-        "CUSTOM_MODELS_CONFIG_PATH": "$HOME/projects/hq/global-config/pal/custom_models.json",
+        "CUSTOM_API_KEY": "${SECONDARY_LLM_API_KEY}",
+        "CUSTOM_API_URL": "${SECONDARY_LLM_BASE_URL}",
+        "CUSTOM_MODEL_NAME": "${SECONDARY_LLM_MODEL}",
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
         "DISABLED_TOOLS": "analyze,refactor,testgen,secaudit,docgen,tracer",
         "DEFAULT_MODEL": "auto"
