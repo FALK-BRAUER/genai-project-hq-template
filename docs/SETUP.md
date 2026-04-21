@@ -214,7 +214,7 @@ exec ssh \
   -o BatchMode=yes \
   -i /Users/YOUR_USER/.ssh/id_ed25519 \
   agent@localhost \
-  'export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"; /Users/agent/projects/agent-pa/tools/scripts/run-triage.sh'
+  'export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"; /Users/AGENT_USER/projects/agent-pa/tools/scripts/run-triage.sh'
 ```
 
 ---

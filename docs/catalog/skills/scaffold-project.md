@@ -31,7 +31,7 @@ Template defaults to `nextjs-app` if not specified.
 - Uses the global default stack unless explicitly told otherwise.
 - Never scaffolds into an existing directory without confirmation.
 - The project CLAUDE.md references global standards, not duplicating them.
-- Creates a FOR_FALK.md explaining the project setup after scaffolding.
+- Creates a FOR_HUMAN.md explaining the project setup after scaffolding.
 - The hq project command `/new-project` delegates to this skill.
 - Also available as a hq project-level skill with identical logic.
 

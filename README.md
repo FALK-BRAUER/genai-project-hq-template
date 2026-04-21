@@ -175,6 +175,28 @@ These are available when you open Claude Code in this repo:
 
 ---
 
+## GSD — Planning & Execution Framework
+
+GSD (Get Stuff Done) is a Claude Code skill pack for structured project planning and phased execution. Install it once globally, then use it in any project.
+
+```bash
+# Install GSD globally
+claude skills install gsd
+```
+
+Once installed, initialise any project for structured planning:
+
+```bash
+cd ~/projects/your-project
+/gsd:new-project
+```
+
+This creates `.planning/` and `ROADMAP.md`. From there, plan phases with `/gsd:plan-phase` and execute with `/gsd:do`.
+
+Skip GSD for one-off scripts or short tasks — it pays off on multi-phase builds.
+
+---
+
 ## Multi-Pass Pipeline Pattern
 
 If you run scheduled AI jobs (analysis pipelines, data collection, etc.), use the pipeline runner pattern in your projects:

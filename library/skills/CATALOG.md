@@ -20,6 +20,7 @@ Master index of all skills in the vibe-hq library. Updated by `/manage-skills li
 |---|---|---|---|
 | `dependency-audit` | task | active | LinkedInOrganiser |
 | `markitdown` | task | active | (global) |
+| `today` | task | active | (global) |
 
 ## Orchestration Skills
 
@@ -28,21 +29,6 @@ Master index of all skills in the vibe-hq library. Updated by `/manage-skills li
 | `prd-to-tickets` | orchestration | active | (global) |
 | `tdd` | orchestration | active | (global) |
 
-## Business Operations Skills
-
-| Skill | Category | Status | Used By | Source |
-|---|---|---|---|---|
-| `solo-ops` | business-ops | active | your-project | ORBWEVA/solo-skills (MIT) |
-| `contracts` | business-ops | active | your-project | alirezarezvani/claude-skills (MIT) |
-| `legal-ops` | business-ops | active | your-contracts-project | panaversity/agentfactory (Apache 2.0) |
-| `accounting` | business-ops | active | your-project | alirezarezvani/claude-skills (MIT) |
-| `hr` | business-ops | active | your-project | panaversity/agentfactory (Apache 2.0) |
-| `branded-docs` | business-ops | active | your-ventures-project | Original (vibe-hq) |
-| `quote` | business-ops | active | your-ventures-project | Original (vibe-hq) |
-
-## Candidates (Pending Evaluation)
-
-*(All candidates promoted on 2026-03-26. Evaluation files retained in `_candidates/` for reference.)*
 
 ## External Skill Registries
 

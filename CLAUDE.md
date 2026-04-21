@@ -22,6 +22,9 @@ via macOS launchd scheduled jobs.
 - /doctor — health check the setup
 - /sync — pull learnings, update templates
 
+## GSD (Get Stuff Done)
+GSD is a planning and execution framework installed globally. Run `/gsd:new-project` from any project directory to initialise structured planning (`.planning/` + `ROADMAP.md`). Use it for any multi-phase build work. Skip it for one-off scripts or analysis tasks.
+
 ## Rules
 - Every config change goes through this repo
 - Templates are the source of truth — project configs derive from them
