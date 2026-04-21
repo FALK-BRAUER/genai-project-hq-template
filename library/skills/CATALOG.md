@@ -4,31 +4,32 @@ Master index of all skills in the vibe-hq library. Updated by `/manage-skills li
 
 ## Knowledge Skills
 
-| Skill | Category | Status | Used By |
+| Skill | Category | Status | Notes |
 |---|---|---|---|
-| `apache-camel` | knowledge | active | camel-cpq-integration-framework |
-| `claude-api` | knowledge | active | (global) |
-| `content-pipeline` | knowledge | active | LinkedInOrganiser |
-| `ghost-cms` | knowledge | active | LinkedInOrganiser |
-| `nextjs-patterns` | knowledge | active | LinkedInOrganiser |
-| `pricing-domain` | knowledge | active | camel-cpq-integration-framework |
-| `prisma-domain` | knowledge | active | LinkedInOrganiser |
+| `apache-camel` | knowledge | active | Integration / routing projects |
+| `claude-api` | knowledge | active | Projects using Claude API directly |
+| `content-pipeline` | knowledge | active | Content publishing / blog projects |
+| `ghost-cms` | knowledge | active | Ghost CMS projects |
+| `nextjs-patterns` | knowledge | active | Next.js projects |
+| `pricing-domain` | knowledge | active | CPQ / pricing engine projects |
+| `prisma-domain` | knowledge | active | Prisma ORM projects |
+| `supabase-domain` | knowledge | active | Supabase backend projects |
 
 ## Task Skills
 
-| Skill | Category | Status | Used By |
+| Skill | Category | Status | Notes |
 |---|---|---|---|
-| `dependency-audit` | task | active | LinkedInOrganiser |
+| `dependency-audit` | task | active | Any project with dependencies |
 | `markitdown` | task | active | (global) |
-| `today` | task | active | (global) |
+| `today` | task | active | (global) — start-of-day context |
 
 ## Orchestration Skills
 
-| Skill | Category | Status | Used By |
+| Skill | Category | Status | Notes |
 |---|---|---|---|
 | `prd-to-tickets` | orchestration | active | (global) |
 | `tdd` | orchestration | active | (global) |
-
+| `gsd` | orchestration | active | (global) — 57-command planning + execution suite |
 
 ## External Skill Registries
 
