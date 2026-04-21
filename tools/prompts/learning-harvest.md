@@ -1,14 +1,11 @@
 # Task: Daily Learning Harvest
 
-You are syncing learnings from active projects back into vibe-hq.
+You are syncing learnings from active projects back into hq.
 
 ## Instructions
 
-1. **Check each active project** for changes since yesterday:
-   - `~/projects/YOUR_PROJECT/CLAUDE.md`
-   - `~/projects/blogs/CLAUDE.md`
-   - `~/projects/LinkedInOrganiser/CLAUDE.md`
-   - `~/projects/camel-cpq-integration-framework/CLAUDE.md`
+1. **Check each active project** listed in `registry/active/` for changes since yesterday:
+   - `~/projects/<project-name>/CLAUDE.md`
 
 2. For each project, compare:
    - CLAUDE.md content vs what's documented in `registry/active/{project}.md`
@@ -53,4 +50,4 @@ You are syncing learnings from active projects back into vibe-hq.
 - Read-only for project repos — never write to them
 - Only flag meaningful changes, not whitespace or formatting
 - If a project has a new skill that's clearly project-specific (not reusable), skip it
-- Do NOT run `git pull`, `git fetch`, or `git rebase` — this repo is local-only, there is no upstream to sync from
+- Do NOT run `git pull`, `git fetch`, or `git rebase` — this repo is local-only

@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by LinkedInOrganiser
+- **Scope:** Library — install in any content/Next.js project
 - **Category:** Knowledge
 - **Status:** Active
 
@@ -13,7 +13,7 @@ Next.js App Router patterns and conventions reference. Covers file conventions (
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| LinkedInOrganiser | Symlinked from library |
+| your-content-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Default to server components -- they do not ship JS to the browser.

@@ -3,17 +3,17 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by camel-cpq
+- **Scope:** Library — install in any integration/routing project
 - **Category:** Knowledge
 - **Status:** Active
 
 ## What It Does
-Apache Camel YAML route design and Groovy transform patterns for Spring Boot. Covers route structure (YAML DSL), common endpoints (timer, direct, rest, file, http), Groovy transform blocks, error handling with onException, and project conventions specific to the camel-cpq-integration-framework (app_* directory structure, env.properties for credentials, reusable route templates).
+Apache Camel YAML route design and Groovy transform patterns for Spring Boot. Covers route structure (YAML DSL), common endpoints (timer, direct, rest, file, http), Groovy transform blocks, error handling with onException, and common project conventions (app_* directory structure, env.properties for credentials, reusable route templates).
 
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| camel-cpq | Symlinked from library |
+| your-integration-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Each `app_*/` is a standalone integration task with `main.camel.yaml` as the entry point.

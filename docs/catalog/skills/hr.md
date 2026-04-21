@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by your-project-2-gdrive, contracts-work
+- **Scope:** Library — install in any business operations project
 - **Category:** Business Ops
 - **Status:** Active
 
@@ -22,8 +22,8 @@ Key sections:
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| your-project-2-gdrive | Symlinked from library |
-| contracts-work | Symlinked from library |
+| your-business-project | Symlinked from library |
+| your-contracts-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Every employee must receive written Key Employment Terms (KETs) within 14 days of starting.

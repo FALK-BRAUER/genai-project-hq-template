@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by your-project-2-gdrive, contracts-work
+- **Scope:** Library — install in any business operations project
 - **Category:** Business Ops
 - **Status:** Active
 
@@ -23,8 +23,8 @@ Also covers Singapore legal system overview, director obligations under the Comp
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| your-project-2-gdrive | Symlinked from library |
-| contracts-work | Symlinked from library |
+| your-business-project | Symlinked from library |
+| your-contracts-project | Symlinked from library |
 
 ## Tips & Gotchas
 - ALL outputs require review by licensed attorney. This skill provides legal analysis, not legal advice.

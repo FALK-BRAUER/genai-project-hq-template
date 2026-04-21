@@ -74,15 +74,16 @@
 | Generate a branded PDF (quote, invoice, SOW) | `branded-docs` skill | Library Skill |
 | Break a PRD into tickets | PRD to Tickets skill | Library Skill |
 
-## Domain-Specific
+## Domain-Specific (examples — install skills per project)
 
-| I want to... | Use | Available In |
-|--------------|-----|-------------|
-| Investment research (multi-model) | PAL your-project skill | your-project |
-| Stock prices / fundamentals | Yahoo Finance MCP | your-project |
-| SEC filings | SEC EDGAR MCP | your-project |
-| Economic data (CPI, rates) | FRED MCP | your-project |
-| Accounting / tax (Singapore) | Accounting skill | contracts-work, your-project-2-gdrive |
-| Contract drafting | Contracts skill | LinkedInOrganiser, camel-cpq |
-| Ghost CMS publishing | Ghost CMS skill | LinkedInOrganiser |
-| Apache Camel routes | Apache Camel skill | camel-cpq |
+| I want to... | Use | Type |
+|--------------|-----|------|
+| Investment research (multi-model) | PAL MCP + investment research skill | MCP + Skill |
+| Stock prices / fundamentals | Yahoo Finance MCP | MCP |
+| SEC filings | SEC EDGAR MCP | MCP |
+| Economic data (CPI, rates) | FRED MCP | MCP |
+| Accounting / tax | Accounting skill (Singapore defaults, adaptable) | Library Skill |
+| Contract drafting | Contracts skill | Library Skill |
+| Ghost CMS publishing | Ghost CMS skill | Library Skill |
+| Apache Camel routes | Apache Camel skill | Library Skill |
+| Pricing engine / CPQ | Pricing Domain skill | Library Skill |

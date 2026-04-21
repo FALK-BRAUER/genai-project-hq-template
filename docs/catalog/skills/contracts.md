@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by LinkedInOrganiser, camel-cpq
+- **Scope:** Library — install in any project that needs this
 - **Category:** Business Ops
 - **Status:** Active
 
@@ -22,8 +22,8 @@ Also includes a drop-in PDPA compliance clause block, rate card structure, and a
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| LinkedInOrganiser | Symlinked from library |
-| camel-cpq | Symlinked from library |
+| your-content-project | Symlinked from library |
+| your-integration-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Not a substitute for legal counsel. Use these as strong starting points; review with a lawyer for high-value or complex engagements.

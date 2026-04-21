@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by your-project-2-gdrive, contracts-work
+- **Scope:** Library — install in any business operations project
 - **Category:** Business Ops
 - **Status:** Active
 
@@ -24,8 +24,8 @@ All adapted for Singapore context with SGD pricing, IRAS/CPF/MOM compliance, and
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| your-project-2-gdrive | Symlinked from library |
-| contracts-work | Symlinked from library |
+| your-business-project | Symlinked from library |
+| your-contracts-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Billable utilization target is 50-60% of a 40-hour week (20-24 billable hours).

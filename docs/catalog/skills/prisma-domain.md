@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by LinkedInOrganiser
+- **Scope:** Library — install in any content/Next.js project
 - **Category:** Knowledge
 - **Status:** Active
 
@@ -13,7 +13,7 @@ Prisma schema design patterns and query optimization reference. Covers naming co
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| LinkedInOrganiser | Symlinked from library |
+| your-content-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Always review generated SQL before applying: `npx prisma migrate dev --create-only`.

@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by camel-cpq
+- **Scope:** Library — install in any integration/routing project
 - **Category:** Knowledge
 - **Status:** Active
 
@@ -13,7 +13,7 @@ CPQ and pricing business logic patterns reference. Covers the price waterfall (L
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| camel-cpq | Symlinked from library |
+| your-integration-project | Symlinked from library |
 
 ## Tips & Gotchas
 - All monetary calculations must use integer cents, not floating point.

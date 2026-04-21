@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by LinkedInOrganiser
+- **Scope:** Library — install in any content/Next.js project
 - **Category:** Knowledge
 - **Status:** Active
 
@@ -13,7 +13,7 @@ Anthropic SDK patterns reference for building features that call Claude directly
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| LinkedInOrganiser | Symlinked from library |
+| your-content-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Never hardcode API keys -- use environment variables.

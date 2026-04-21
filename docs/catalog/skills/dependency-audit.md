@@ -3,7 +3,7 @@
 - **Type:** Skill (Library)
 - **Command:** N/A (loaded contextually)
 - **Source:** hq library
-- **Scope:** Library — used by LinkedInOrganiser, camel-cpq
+- **Scope:** Library — install in any project that needs this
 - **Category:** Task
 - **Status:** Active
 
@@ -13,8 +13,8 @@ Check for outdated, vulnerable, or unused npm dependencies. Runs a five-step wor
 ## Used By
 | Project | How Loaded |
 |---------|------------|
-| LinkedInOrganiser | Symlinked from library |
-| camel-cpq | Symlinked from library |
+| your-content-project | Symlinked from library |
+| your-integration-project | Symlinked from library |
 
 ## Tips & Gotchas
 - Run periodically or before releases, not just when something breaks.
